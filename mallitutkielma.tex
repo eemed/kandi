@@ -1,0 +1,487 @@
+% !TEX encoding = UTF-8 Unicode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Tampereen yliopisto
+% Luonnontieteiden tiedekunta
+% Matematiikka
+%
+% Kandidaattitutkielman malli.
+% Tutkielman matemaattinen sisältö on prof. Seppo Hyyrön.
+%
+% Päivitetty 23.9.2018
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Yli 60-sivuiset pro gradu -tutkielmat painetaan kaksipuolisina. Jos pro gradu -tutkielmassa on korkeintaan 60 sivua, se painetaan yksipuolisena eli vain paperin yhdelle puolelle. Näin sen vuoksi, että kovin ohuen tutkielman selkään ei mahdu tekijän nimeä. Sivumäärään lasketaan tutkielman kaikki sivut nimiösivusta viimeiseen liitesivuun asti.
+\documentclass[a4paper,12pt,leqno,oneside]{report} % jos korkeintaan 60 sivua
+%\documentclass[a4paper,12pt,leqno,twoside]{report} % jos yli 60 sivua
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[finnish]{babel}
+\usepackage[intlimits]{amsmath}
+%\usepackage{amssymb} % Ei tarvita, kun käytetään makropakettia newtxmath.
+\usepackage{amsthm}
+
+% Fontteina Times ja Helvetica.
+\usepackage[scale=0.94]{tgheros} % Helvetica tekstifontit.
+\usepackage{newtxtext} % Times tekstifontit.
+\usepackage[vvarbb]{newtxmath} % Times matematiikkafontit.
+
+% Vaihtoehtoisesti fontteina voi käyttää LaTeXin oletusarvoista Computer Modern -kirjainperhettä (poista tällöin edelliset komennot).
+%\usepackage{lmodern}
+
+\usepackage{bm} % Matematiikkatilan lihavat kursiivikirjaimet.
+\usepackage{enumerate} % Luetelmanumeroiden muokkaamiseen.
+%\usepackage{pdfpages} % Pdf-muotoisten liitteiden liittämiseen.
+
+% Väliotsikoiden tyyliä muokataan makropaketilla titlesec. Jos tarvitset otsikkotasoa \subsubsection, niin muuta optio small muotoon medium.
+\usepackage[rm,bf,small,pagestyles]{titlesec}
+\titleformat{\chapter}{\normalfont\rmfamily\bfseries\LARGE}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{-25pt}{30pt}
+
+% Ulkoiset kuvatiedostot liitetään makropaketin graphicx komennolla \includegraphics.
+\usepackage{graphicx}
+%\graphicspath{{Kuvat/}} % Ulkoisten kuvatiedostojen kansio.
+
+% Kelluvien kuvien ja taulukoiden oletusarvoista sijoittelua voi säätää makropaketin float komennolla \floatplacement.
+\usepackage{float}
+\floatplacement{figure}{htb}	% oletusarvo on tbp
+\floatplacement{table}{htb}		% oletusarvo on tbp
+
+% Kuvien ja taulukoiden otsikot muotoillaan makropaketilla caption.
+\usepackage[%
+	margin=\leftmargini,
+	labelfont=bf,
+	labelsep=period,
+	tableposition=top,
+]{caption}
+
+% Hypertekstilinkkejä ja url-osoitteita voi tehdä makropaketilla hyperref, jota on kutsuttava viimeiseksi. Optioilla pdftitle ja pdfauthor pdf-tiedostoon lisätään tutkielman ja tekijän nimet metatietoina.
+\usepackage[%
+%	pdftitle={Tutkielman nimi},
+%	pdfauthor={Etunimi Sukunimi},
+	hidelinks,
+	pdfpagemode=UseNone,
+	pdfstartview=FitH]{hyperref}
+% Verkko-osoitteet tulostetaan samalla fontilla kuin muukin teksti:
+\urlstyle{same}
+
+% Kasvatetaan palstan korkeutta neljä riviä:
+\addtolength{\textheight}{4\baselineskip}
+\addtolength{\topmargin}{-3.5\baselineskip}
+
+\setlength{\textwidth}{401pt} % Palstan leveys.
+\setlength{\footskip}{4\baselineskip} % Sivunumeron etäisyys palstan alareunasta.
+
+% Asetetaan marginaalit yhtäsuuriksi:
+\setlength{\oddsidemargin}{0.5\paperwidth}
+\addtolength{\oddsidemargin}{-0.5\textwidth}
+\addtolength{\oddsidemargin}{-1in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+% Kandidaattitutkielmassa tarvitaan harvennettua riviväliä, jotta korjausmerkinnöille jää tilaa. Gradussa riviväliä ei harvenneta, joten seuraava rivi jätetään silloin pois.
+\linespread{1.35}\selectfont % vain kandidaattitutkielmassa
+
+% Lauseiden teksti kursivoidaan:
+\theoremstyle{plain}
+\newtheorem{lause}{Lause}[chapter]
+
+% Määritelmien ja esimerkkien tekstiä ei yleensä kursivoida.
+\theoremstyle{definition}
+\newtheorem{maaritelma}{Määritelmä}[chapter]
+\newtheorem{esimerkki}{Esimerkki}[chapter]
+
+% Huomautuksia ei numeroida:
+\theoremstyle{remark}
+\newtheorem*{huomautus}{Huomautus}
+
+% Kaavat numeroidaan luvuittain:
+\numberwithin{equation}{chapter}
+
+% Pitkä yhtälöketju voidaan jakaa eri sivuille:
+\allowdisplaybreaks[1]
+
+% Muutetaan lähdeluettelon otsikko, joka on oletusarvoisesti "Kirjallisuutta".
+\AtBeginDocument{\renewcommand*{\bibname}{Lähteet}}
+
+% Komento \Kuukausi tulostaa nykyisen kuukauden nimen isolla alkukirjaimella kirjoitettuna.
+\newcommand*{\Kuukausi}{\ifcase \month \or Tammi\or Helmi\or Maalis\or Huhti\or Touko\or Kesä\or Heinä\or Elo\or Syys\or Loka\or Marras\or Joulu\fi kuu}
+
+% Joitain komentoja matemaattisia merkintöjä varten:
+\newcommand*{\Nset}{\mathbb{N}}  % luonnollisten lukujen joukko
+\newcommand*{\Zset}{\mathbb{Z}}  % kokonaislukujen joukko
+\newcommand*{\Qset}{\mathbb{Q}}  % rationaalilukujen joukko
+\newcommand*{\Rset}{\mathbb{R}}  % reaalilukujen joukko
+\newcommand*{\Cset}{\mathbb{C}}  % kompleksilukujen joukko
+
+% Makropaketin amsmath käyttöohjeissa (amsldoc.pdf s. 18--19) suositellaan itseisarvolle ja normille seuraavia komentoja:
+\newcommand*{\abs}[1]{\left\lvert#1\right\rvert}   % itseisarvo
+\newcommand*{\norm}[1]{\left\lVert#1\right\rVert}  % normi
+
+% Matriiseille ja vektoreille kannattaa määritellä oma komentonsa. Komennon \bm asemesta voi tässä käyttää komentoa \mathbf, jos halutaan käyttää pystyjä eikä kursivoituja kirjaimia.
+\newcommand*{\mx}{\bm}  % matriisi tai vektori
+
+% Suomessa käytettävä integraaliinsijoitusmerkki saadaan alla olevalla komennolla \sijoitus{alaraja}{yläraja}. Tämän kanssa on hyvä käyttää amsmath-makropaketin optiota [intlimits], jolla integrointirajat asetetaan integraalimerkin ylä- ja alapuolelle eikä viereen kuten LaTeXissa oletusarvoisesti.
+\makeatletter
+\@ifpackageloaded{newtxmath}
+{\newcommand*{\sijoitus}[2]{\mathop{\bigg/}\limits_{\mspace{-11mu}#1}^{\mspace{10mu}#2}}}
+{\newcommand*{\sijoitus}[2]{\mathop{\Big/}\limits_{\mspace{-19mu}#1}^{\mspace{19mu}#2}}}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Tutkielman nimiösivu:
+\begin{titlepage}
+\large\bfseries\centering
+
+\hrule height 1pt
+\medskip
+
+TAMPEREEN YLIOPISTO\\
+Kandidaattitutkielma
+% Pro gradu -tutkielma
+
+\medskip
+\hrule height 1pt
+
+\vspace{\fill}
+
+\raisebox{1.5cm}[0pt][0pt]{Etunimi Sukunimi}\\[-\baselineskip]
+{\LARGE Tiettyjen suppenevien\\
+reaalilukujonojen olemassaolosta\par}
+
+\vspace{\fill}
+
+\hrule height 1pt
+\medskip
+
+Luonnontieteiden tiedekunta\\
+Matematiikka\\
+\Kuukausi\ \the\year
+
+\medskip
+\hrule height 1pt
+\end{titlepage}
+
+% Lasketaan nimiösivu mukaan sivunumerointiin:
+\setcounter{page}{2}
+
+% Komento \cleardoublepage pakottaa kaksipuoleisessa dokumentissa seuraavan sivun alkamaan aukeaman oikealta puolelta. Aukeaman vasemmanpuoleinen sivu jää tällöin tyhjäksi. Yksipuoleisessa dokumentissa tämä tekee vain normaalin sivunvaihdon.
+\cleardoublepage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tiivistelmä (vain gradussa):
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\smallskipamount}
+Tampereen yliopisto
+
+Luonnontieteiden tiedekunta
+
+Sukunimi, Etunimi: Tutkielman nimi fi {f}i
+
+Pro gradu -tutkielma, xx s., x liites. % Korvaa xx ja x sivumäärillä. Liitesivujen lukumäärä ilmoitetaan vain, jos liitteitä on ja liitteet eivät noudata tutkielman sivunumerointia.
+
+Matematiikka
+
+\Kuukausi\ \the\year\\
+\rule{\textwidth}{0.5pt}
+\endgroup
+
+
+\section*{Tiivistelmä}
+
+Pro gradu -tutkielmaan on liitettävä tiivistelmä. Kandidaattitutkielmassa ei tarvitse olla tiivistelmää.
+
+\cleardoublepage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sisällysluettelo.
+\tableofcontents
+
+\cleardoublepage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Johdanto}
+
+Tämän tutkielman luvussa \ref{ch: Tiettyjen suppenevien} tarkastelemme sellaisten suppenevien reaalilukujonojen olemassaoloa, joilta vaaditaan tiettyjä ominaisuuksia.
+
+Ensimmäiseksi todistamme, että on olemassa suppeneva jono, joka on annetun rajoitetun (ei tietenkään välttämättä suppenevan) reaalilukujonon osajonona. Tätä tulosta sanotaan jonoja koskevaksi Bolzanon--Weierstrassin lauseeksi. Sen todistamme pykälässä~\ref{sec: Jonoja koskeva BW:n lause}.
+
+Toiseksi todistamme, että jos on annettu reaalilukujoukko ja jokin sen kasautumispiste, niin on olemassa tämän joukon pisteiden jono, joka suppenee kohti mainittua kasautumispistettä. Tämän tuloksen esitämme pykälässä~\ref{sec: Kasautumispiste jonon raja-arvona}.
+
+Kolmanneksi todistamme, että jos on annettu ylhäältä rajoitettu reaalilukujoukko, niin on olemassa kasvava tämän joukon pisteiden jono, joka suppenee kohti tämän joukon pienintä ylärajaa eli \emph{supremumia}. Tämän tuloksen todistamme pykälässä~\ref{sec: Supremum jonon raja-arvona}.
+
+Valmisteluna luvussa \ref{ch: Tiettyjen suppenevien} käsittelemäämme pääaihetta varten esitämme luvussa \ref{ch: Valmistelevia tarkasteluja} luettelonomaisesti muutamia tarvittavia määritelmiä ja lauseita.
+
+Lukijalta edellytämme joidenkin analyysin perusasioiden tuntemista. Edellytämme mm., että lukija tuntee suppenevan reaalilukujonon tarkan määritelmän sekä supremumin käsitteen. Lähdeteoksena käytämme Mathmanin kirjaa An elementary course in mathematical analysis.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Valmistelevia tarkasteluja}\label{ch: Valmistelevia tarkasteluja}
+
+\section{Tarvittavien käsitteiden määritelmiä}
+
+Luvussa \ref{ch: Valmistelevia tarkasteluja} esitämme lyhyesti muutamia pääaiheemme käsittelyssä tarvitsemiamme apuneuvoja. Tässä pykälässä esitämme kolme määritelmää: $\varepsilon$"-ympäristön,
+kasautumispisteen ja osajonon määritelmän (vrt. \cite[s.~32--33]{Mathman}).
+
+\begin{maaritelma}
+Olkoon $\varepsilon > 0$ ja $a\in\Rset$. Silloin joukkoa
+\[
+    \{\, x\in\Rset \mid \abs{x - a} < \varepsilon \,\}
+\]
+eli väliä $\left]a-\varepsilon, a+\varepsilon\right[$ sanotaan luvun
+$a$ \emph{$\varepsilon$-ympäristöksi}.
+\end{maaritelma}
+
+\begin{maaritelma}\label{def: kasautumispiste}
+Olkoon $S\subseteq\Rset$. Reaalilukua $a$ sanotaan joukon $S$ \emph{kasautumispisteeksi}, jos luvun $a$ jokaisessa $\varepsilon$-ympäristössä on ainakin yksi luvusta $a$ poikkeava joukon $S$ luku.
+\end{maaritelma}
+
+\begin{maaritelma}
+Olkoon $(s_n)_{n=1}^\infty$ jokin jono ja $(n_k)_{k=1}^\infty$ sellainen jono, jonka jäsenet $n_1$, $n_2$, \dots\ ovat luonnollisia lukuja ja toteuttavat ehdon
+\begin{equation}
+    n_k < n_{k+1} \qquad (k = 1,2,\dots).
+\end{equation}
+Silloin jonoa $(t_k)_{k=1}^\infty$, missä
+\begin{equation}
+    t_k = s_{n_k} \qquad (k = 1,2,\dots),
+\end{equation}
+sanotaan jonon $(s_n)_{n=1}^\infty$ \emph{osajonoksi}.
+\end{maaritelma}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kaksi kasautumispisteitä koskevaa lausetta}
+
+Nimitys kasautumispiste luo mielikuvan kasautumisesta, useiden lukujen kasautumisesta jonnekin. Seuraava lause \ref{thm: kasautumispisteen ympäristössä} vastaa ehkä tähän mielikuvaan selkeämmin kuin määritelmä~\ref{def: kasautumispiste}.
+
+\begin{lause}\label{thm: kasautumispisteen ympäristössä}
+Olkoon $S\subseteq\Rset$. Jos $a$ on joukon $S$ kasautumispiste, niin luvun $a$ jokaisessa $\varepsilon$-ympäristössä on ääretön määrä joukon $S$ lukuja.
+\end{lause}
+
+\begin{proof}
+Ks. \cite[s. 37]{Mathman}.
+\end{proof}
+
+Seuraavaa lausetta \ref{Bolzanon--Weierstrassin lause} sanotaan yleisesti \emph{Bolzanon--Weierstrassin lauseeksi}. Monissa kirjoissa tällä nimellä kulkeva lause voi olla hieman erilainen mutta kuitenkin läheisessä asiayhteydessä lauseeseen~\ref{Bolzanon--Weierstrassin lause}.
+
+\begin{lause}\label{Bolzanon--Weierstrassin lause}
+Olkoon $S\subseteq\Rset$ ja olkoon $S$ rajoitettu ja ääretön. Silloin joukolla $S$ on ainakin yksi kasautumispiste.
+\end{lause}
+
+\begin{proof}
+Ks. \cite[s. 39]{Mathman}.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Suppenevan jonon osajonon suppeneminen}
+
+Luvussa \ref{ch: Tiettyjen suppenevien} käytämme myöskin seuraavaa osajonoja koskevaa lausetta.
+
+\begin{lause}\label{osajonoja koskeva lause}
+Jos reaalilukujono suppenee, niin sen jokainen osajono suppenee kohti samaa raja-arvoa.
+\end{lause}
+
+\begin{proof}
+Ks. \cite[s. 43]{Mathman}.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter[Tiettyjen suppenevien reaalilukujonojen olemassaolosta]{Tiettyjen suppenevien\\ reaalilukujonojen olemassaolosta}\label{ch: Tiettyjen suppenevien}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Jonoja koskeva Bolzanon--Weierstrassin lause}%
+\label{sec: Jonoja koskeva BW:n lause}
+
+Seuraavaa lausetta \ref{jonoja koskeva BW:n lause} sanotaan monissa kirjoissa \emph{Bolzanon--Weierstrassin lau\-seeksi}. Aikaisemmin oli jo esillä lause \ref{Bolzanon--Weierstrassin lause}, jolle myös usein käytetään tätä samaa nimitystä. Jos halutaan erottaa näiden lauseiden nimitykset toisistaan, voidaan sanoa, että lause \ref{Bolzanon--Weierstrassin lause} on joukkoja koskeva \emph{Bolzanon--Weierstras\-sin lause} ja lause \ref{jonoja koskeva BW:n lause} jonoja koskeva \emph{Bolzanon--Weierstrassin lause}. Lauseen \ref{jonoja koskeva BW:n lause} todistuksessa käytämme apuna lausetta~\ref{Bolzanon--Weierstrassin lause}.
+
+\begin{lause}\label{jonoja koskeva BW:n lause}
+Rajoitetulla reaalilukujonolla on aina suppeneva osajono.
+\end{lause}
+
+\begin{proof}[Todistus \upshape(vrt. {\cite[s. 48]{Mathman}})]
+Olkoon reaalilukujono $(s_n)_{n=1}^\infty$ rajoitettu.
+Merkitsemme
+\[
+    S = \{\, s_n \mid n\in\Nset \,\}.
+\]
+Käsittelemme erikseen tapaukset, joissa $S$ on äärellinen ja ääretön.
+
+Aluksi oletamme, että $S$ on äärellinen. Silloin joukossa $S$ on ainakin yksi sellainen luku $c$, että $s_n=c$ äärettömän monella indeksin $n$ arvolla. Tarkoittakoon $c$ jatkossa yhtä em. ehdon toteuttavista luvuista. Olkoot nyt luonnolliset luvut $n_1$, $n_2$, \dots\ sellaisia, että $n_1 < n_2 < n_3 < \cdots$ sekä $s_{n_k} = c$ ($k = 1,2,\dots$). Silloin $s_{n_k}\to c$, kun $k\to\infty$, joten $(s_{n_k})_{k=1}^\infty$ on lauseen vaatimukset täyttävä osajono.
+
+Nyt oletamme, että $S$ on ääretön. Koska jono $(s_n)$ on rajoitettu, niin myös joukko $S$ on rajoitettu. Siis joukkoja koskevan Bolzanon--Weierstrassin lauseen (lauseen \ref{Bolzanon--Weierstrassin lause}) mukaan joukolla $S$ on ainakin yksi kasautumispiste. Olkoon $c$ jokin joukon $S$ kasautumispiste. Silloin pisteen $c$ $1$-ympäristössä $\left]c-1,c+1\right[$ on lauseen \ref{thm: kasautumispisteen ympäristössä} mukaan ääretön määrä joukon $S$ pisteitä. Valitsemme jonkin luvun $n_1\in\Nset$ niin, että $s_{n_1}\in\left]c-1,c+1\right[$. Myöskin pisteen $c$ $\frac{1}{2}$-ympäristössä on ääretön määrä joukon $S$ pisteitä. Valitsemme luvun $n_2\in\Nset$ niin, että $n_2 > n_1$ sekä $s_{n_2}\in\left]c-\frac{1}{2},c+\frac{1}{2}\right[$. Jatkamme vastaavasti. Yleisesti, kun $k\in\Nset$ ja kun olemme jo valinneet luvun $n_k$, valitsemme luvun $n_{k+1}$ seuraavalla tavalla. Koska kasautumispisteen $c$ $\frac{1}{k+1}$-ympäristössä on ääretön määrä joukon $S$ pisteitä, niin voimme valita luvun $n_{k+1}\in\Nset$ siten, että $n_{k+1} > n_k$ sekä $s_{n_{k+1}}\in\left]c-\frac{1}{k+1},c+\frac{1}{k+1}\right[$; se, että tässä voimme valita $n_{k+1} > n_k$, johtuu siitä, että ehdon $n\le n_k$ toteuttavia indeksejä $n$ on vain äärellinen määrä. Tällä tavoin valittu osajono $(s_{n_k})_{k=1}^\infty$ täyttää ehdon
+\begin{equation}\label{eq: osajonon ehto}
+    \abs{s_{n_k} - c} < \frac{1}{k} \qquad (k=1,2,\dots).
+\end{equation}
+
+Osoitamme nyt, että $s_{n_k}\to c$, kun $k\to\infty$. Valitsemme mielivaltaisen luvun $\varepsilon > 0$. Merkitsemme $k_0 = [1/\varepsilon] + 1$, jolloin $k_0 > 1/\varepsilon$ ja siis $1/k_0 < \varepsilon$. Jos nyt $k\ge k_0$, niin ehdon \eqref{eq: osajonon ehto} nojalla
+\[
+    \abs{s_{n_k} - c} < \frac{1}{k} \le \frac{1}{k_0} < \varepsilon.
+\]
+Nyt olemme osoittaneet, että
+\[
+    \forall\varepsilon > 0\colon \exists k_0\in\Nset\colon
+    \forall k\ge k_0\colon \abs{s_{n_k} - c} < \varepsilon.
+\]
+Siis $s_{n_k}\to c$. Näin olemme todistaneet lauseen~\ref{jonoja koskeva BW:n lause}.
+\end{proof}
+
+Esitämme vielä seuraavan, lauseen \ref{jonoja koskeva BW:n lause} aihepiiriä valaisevan esimerkin.
+
+\begin{esimerkki}
+Tarkastelemme jonoa $(s_n)_{n=1}^\infty$, missä
+\[
+    s_n = \frac{n+1}{n+2}\Bigl(\sin\frac{2n\pi}{3} + \cos\frac{2n\pi}{3}\Bigr)
+    \qquad (n = 1,2,\dots).
+\]
+Tällä jonolla on osajonot $(t_k)_{k=1}^\infty$, $(u_k)_{k=1}^\infty$
+ja $(v_k)_{k=1}^\infty$, missä
+\begin{alignat*}{2}
+    t_k &= s_{3k}   & &= \frac{3k+1}{3k+2}(\sin 2k\pi +\cos 2k\pi) = \frac{3k+1}{3k+2}, \\[\jot]
+    u_k &= s_{3k+1} & &= \frac{3k+2}{3k+3}\biggl(\sin\Bigl(\frac{2\pi}{3}
+                         + 2k\pi\Bigr) + \cos\Bigl(\frac{2\pi}{3} + 2k\pi\Bigr)\biggr) \\
+        &           & &= \frac{-1 + \sqrt{3}}{2}\,\frac{3k+2}{3k+3}, \\[\jot]
+    v_k &= s_{3k+2} & &= \frac{3k+3}{3k+4}\biggl(\sin\Bigl(\frac{4\pi}{3} + 2k\pi\Bigr)
+                         + \cos\Bigl(\frac{4\pi}{3} + 2k\pi\Bigr)\biggr) \\
+        &           & &= \frac{-1 - \sqrt 3}{2}\,\frac{3k+3}{3k+4}.
+\end{alignat*}
+On helppo nähdä, että $t_k\to 1$, $u_k\to(-1 + \sqrt{3}\mspace{2mu})/2$ ja $v_k\to(-1 - \sqrt{3}\mspace{2mu})/2$. Siis nämä kolme jonon $(s_n)$ osajonoa ovat kaikki suppenevia mutta suppenevat jokainen kohti eri raja-arvoa.
+
+Katsomme vielä jonoa $(s_n)$ lauseen \ref{jonoja koskeva BW:n lause} valossa. Kaikilla indeksin $n\in\Nset$ arvoilla
+\begin{align*}
+    \abs{s_n}
+    &= \frac{n+1}{n+2} \abs{\sin\frac{2n\pi}{3} + \cos\frac{2n\pi}{3}} \\
+    &\le \frac{n+1}{n+2}\left(\abs{\sin\frac{2n\pi}{3}}
+         + \abs{\cos\frac{2n\pi}{3}}\right) \\
+    &\le \frac{n+1}{n+2}(1 + 1) < 2,
+\end{align*}
+joten jono $(s_n)$ on rajoitettu. Voimme siis lauseen \ref{jonoja koskeva BW:n lause} mukaan todeta, että jonolla $(s_n)$ on suppeneva osajono. Tämän olisimme voineet joka tapauksessa todeta, vaikkemme olisikaan keksineet jonoja $(t_k)$, $(u_k)$ ja $(v_k)$ tai muita esimerkkejä suppenevista osajonoista.
+
+Jos jono $(s_n)$ suppenisi kohti raja-arvoa $s$, niin lauseen \ref{osajonoja koskeva lause} mukaan jonot $(t_k)$ ja $(u_k)$ suppenisivat myöskin kohti raja-arvoa $s$, mikä on mahdotonta, koska jonoilla $(t_k)$ ja $(u_k)$ on erisuuret raja-arvot. Siis jono $(s_n)$ ei ole suppeneva.
+\end{esimerkki}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Kasautumispiste jonon raja-arvona}%
+\label{sec: Kasautumispiste jonon raja-arvona}
+
+Lauseen \ref{jonoja koskeva BW:n lause} todistus antaa aiheen kirjoittaa seuraavan lauseen.
+
+\begin{lause}
+Olkoon $S\subseteq\Rset$ ja olkoon $c$ joukon $S$ kasautumispiste. Silloin on olemassa sellaiset luvusta $c$ poikkeavat joukon $S$ luvut $s_1$, $s_2$, \dots, että jono $(s_n)_{n=1}^\infty$ suppenee kohti lukua~$c$.
+\end{lause}
+
+\begin{proof}[Todistus \upshape(vrt. {\cite[s. 51]{Mathman}})]
+Todistus voidaan suorittaa hyvin samankaltaisella menettelyllä, jolla lauseen \ref{jonoja koskeva BW:n lause} todistuksessa tapauksessa ''$S$ ääretön'' todistettiin pistettä $c$ kohti suppenevan osajonon $(s_{n_k})_{n=1}^\infty$ olemassaolo. Siksi katsomme tässä voivamme sivuuttaa todistuksen yksityiskohtien esittämisen. 
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supremum jonon raja-arvona}%
+\label{sec: Supremum jonon raja-arvona}
+
+Aluksi todistamme lauseen, joka ilmaisee yhteyden supremumin ja kasautumispisteen välillä.
+
+\begin{lause}
+Olkoon $S\subseteq\Rset$ ja olkoon $S$ ylhäältä rajoitettu. Olkoon $c = \sup S$ ja $c\notin S$. Silloin $c$ on joukon $S$ kasautumispiste. 
+\end{lause}
+
+\begin{proof}[Todistus \upshape(vrt. {\cite[s. 63]{Mathman}})]
+Valitaan mielivaltainen $\varepsilon > 0$. Koska $c = \sup S$, niin $c$ on joukon $S$ yläraja. Täten ei välissä $\left]c,\infty\right[$ eikä siis välissä $\left[c+\varepsilon,\infty\right[$ ole yhtään joukon $S$ pistettä. Jos myöskään pisteen $c$ $\varepsilon$-ympäristössä $\left]c-\varepsilon,c+\varepsilon\right[$ ei olisi joukon $S$ pisteitä, niin joukossa $\left]c-\varepsilon,\infty\right[$ ei olisi joukon $S$ pisteitä, joten $c-\varepsilon$ olisi joukon $S$ yläraja ja siis $c-\varepsilon$ olisi $\ge\sup S = c$. Tämä on mahdotonta, joten joukossa $\left]c-\varepsilon,c+\varepsilon\right[$ on ainakin yksi joukon $S$ piste. Se piste ei voi olla $= c$, koska $c\notin S$. Siis määritelmän \ref{def: kasautumispiste} mukaan $c$ on joukon $S$ kasautumispiste.
+\end{proof}
+
+Seuraava lause ilmaiseekin jo kohti supremumia kasvavan jonon olemassaolon.
+
+\begin{lause}\label{thm: kohti supremumia kasvava jono}
+Olkoon $S\subseteq\Rset$ ja olkoon $S$ ylhäältä rajoitettu. Olkoon $c = \sup S$. Silloin on olemassa jono $(s_n)_{n=1}^\infty$, joka toteuttaa ehdot
+\begin{enumerate}[\upshape(i)]
+    \item $s_n\in S$\quad $(n = 1,2,\dots)$,
+    \item $(s_n)$ on kasvava jono,
+    \item $s_n\to c$.
+\end{enumerate}
+\end{lause}
+
+\begin{proof}[Todistus \upshape(vrt. {\cite[s. 66]{Mathman}})]
+Tarkastelemme ensin tapausta, jossa $c\in S$. Kun valitsemme $s_n = c$ ($n = 1,2,\dots$), jono $(s_n)$ toteuttaa ehdot (i)--(iii).
+
+Nyt oletamme, että $c\notin S$. Todistamme aluksi, että 
+\begin{equation}\label{eq: c-epsilon < a < c}
+    \forall\varepsilon > 0\colon \exists a\in S\colon c - \varepsilon < a < c.
+\end{equation}
+Jos \eqref{eq: c-epsilon < a < c} ei olisi voimassa, niin olisi olemassa sellainen $\varepsilon > 0$, että välillä $\left]c-\varepsilon,c\right[$ ei olisi joukon $S$ pisteitä, joten $c - \varepsilon$ olisi joukon $S$ yläraja, mikä on ristiriidassa oletuksen $c = \sup S$ kanssa. Siis ehto \eqref{eq: c-epsilon < a < c} toteutuu.
+
+Valitsemme ensin luvun $s_1\in S$ siten, että $c-1 < s_1 < c$; tämä valinta on mahdollinen ehdon \eqref{eq: c-epsilon < a < c} nojalla. Sitten valitsemme luvun $s_2\in S$ siten, että $\max\bigl(s_1,c-\frac{1}{2}\bigr) < s_2 < c$; tämän valinnan voimme todeta mahdolliseksi ehdon \eqref{eq: c-epsilon < a < c} avulla, kun siinä otamme luvun $\varepsilon$ arvoksi pienemmän luvuista $c-s_1$ ja $\frac{1}{2}$. Yleisesti, kun $k\in\Nset$ ja kun olemme valinneet luvun $s_k\in S$, valitsemme luvun $s_{k+1}\in S$ siten, että $\max\bigl(s_k,c-\frac{1}{k+1}\bigr) < s_{k+1} < c$; tämän valinnan huomaamme mahdolliseksi, kun otamme ehdossa \eqref{eq: c-epsilon < a < c} luvuksi $\varepsilon$ pienemmän luvuista $c-s_k$ ja $\frac{1}{k+1}$. Valintamenettelystä näkyy suoraan, että valittu jono $(s_k)$ toteuttaa ehdot (i) ja~(ii).
+
+Ehdon (iii) todistamiseksi valitsemme mielivaltaisen $\varepsilon > 0$. Merkitsemme $n_0 = [1/\varepsilon] + 1$, jolloin $n_0 > 1/\varepsilon$ ja siis $1/n_0 < \varepsilon$. Valintamenettelyn mukaan $\forall n\in\Nset\colon s_n\in\left]c-1/n,c\right[$ ja siis $\abs{s_n - c} < 1/n$. Siis kaikilla luvun $n\ge n_0$ arvoilla
+\[
+    \abs{s_n - c} < \frac{1}{n} \le \frac{1}{n_0} < \varepsilon.
+\]
+Näin ollen
+\[
+    \forall \varepsilon > 0\colon \exists n_0\in\Nset\colon
+    \forall n\ge n_0\colon \abs{s_n - c} < \varepsilon.
+\]
+Siis $s_n\to c$, joten ehto (iii) toteutuu. Näin olemme todistaneet lauseen.
+\end{proof}
+
+Esitämme vielä aiheeseen liittyvän esimerkin.
+
+\begin{esimerkki}
+Tarkastelemme joukkoa
+\[
+    A = \{\, r\in\Qset \mid r < \sqrt{2} \,\}.
+\]
+Jos $a$ on sellainen joukon $A$ yläraja, että $a < \sqrt{2}$, niin on olemassa sellainen $r\in\Qset$, että $a < r < \sqrt{2}$. Siis $r\in A$ ja $r > a$, joten $a$ ei ole joukon $A$ yläraja. Siis joukon $A$ kaikki ylärajat ovat $\ge \sqrt{2}$. Lisäksi $\sqrt{2}$ on joukon $A$ yläraja, joten $\sqrt{2} = \sup A$. Lauseen \ref{thm: kohti supremumia kasvava jono} mukaan on olemassa sellainen kasvava rationaalilukujono $(s_n)$, että $s_n\to\sqrt{2}$.
+
+Yllä esitetty lukua $\sqrt{2}$ kohti suppenevan kasvavan rationaalilukujonon $(s_n)$ olemassaolotodistus on \emph{ei-konstruktiivinen}, jolloin kyllä osoitetaan, että tällainen jono $(s_n)$ on olemassa, mutta ei kuitenkaan anneta menetelmää yhdenkään sellaisen jonon konstruoimiseksi.
+
+\emph{Konstruktiivisen olemassaolotodistuksen} saamme määrittelemällä rekursiivisesti
+\[
+    t_1 = 1, \qquad
+    t_{n+1} = \frac{1}{2}\biggl(t_n+\frac{2}{t_n}\biggr)
+    \quad (n = 1,2,\dots),
+\]
+ja merkitsemällä sitten
+\[
+    s_n = \frac{2}{t_{n+1}} \qquad (n = 1,2,\dots).
+\]
+Tällöin jono $(s_n)$ on joukon $A$ luvuista muodostuva kasvava lukua $\sqrt{2}$ kohti suppeneva jono. Todistuksen yksityiskohdat eivät ole vaikeita, joten jätämme ne tässä esittämättä.
+\end{esimerkki}
+
+Monessa tapauksessa on paljon helpompi todistaa jonkintyyppisen jonon (tai muun tietyt ehdot täyttävän matemaattisen objektin) olemassaolo kuin keksiä menetelmä, jonka avulla tuollainen jono (tai muu objekti) voidaan konstruoida. Siten usein saattaa olla todella vaikeaa tai peräti mahdotonta keksiä konstruktiivista olemassaolotodistusta, vaikka samaa tilannetta koskeva ei"-konstruktiivinen olemassaolotodistus olisikin suhteellisen helposti esitettävissä.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{9}
+% LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
+\addcontentsline{toc}{chapter}{\bibname}
+
+\bibitem{Mathman}
+Mathman, Z. \emph{An elementary course in mathematical analysis}.
+New York: Birch and Star, 1990.
+
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Jos liitteitä on vain yksi, sitä ei tarvitse numeroida:
+\chapter*{Liite}
+% Lisätään numeroimaton liite sisällysluetteloon:
+\addcontentsline{toc}{chapter}{Liite}
+
+Mahdolliset liitteet sijoitetaan tutkielman loppuun.
+
+% Jos liite on tehty jollain toisella ohjelmalla, niin sen voi liittää tutkielmaan pdf-muodossa makropaketin pdfpages komennolla \includepdf. Poista tällöin edelliset komennot \chapter*{Liite} ja \addcontentsline{toc}{chapter}{Liite} ja lisää liitteen alkuun otsikko ja tarvittaessa liitteen kuvaus esimerkiksi samalla ohjelmalla, jolla liitekin on tehty.
+%\includepdf[pages={1-4}]{tiedosto.pdf}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
