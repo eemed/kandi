@@ -203,11 +203,15 @@ pdfstartview=FitH]{hyperref}
                 110 & 100 & 101 & 010 \\
             \end{tabular}
         \end{center}
-        Kaikkien 3 bittisten sanojen joukko on siis seuraava:
+        Määritelemme sanoihin neljännen bitin $x_4 = (x_1 + x_2 + x_3) \mod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
         \[
-            C = \left\{ x_1x_2x_3 \mid  x_i \in \left\{0,1\right\} = \Zset_2, 1 \le i \le 3 \right\}
+            C = \left\{ x_1x_2x_3x_4 \mid  x_i \in \left\{0,1\right\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \mod2\right\}
         \]
-        Lisätään sanoihin neljäs bitti $x_4 = (x_1 + x_2 + x_3) \mod2$.
+        Huomaamme että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
+        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
+    \end{esimerkki}
+    \begin{esimerkki}
+        Koodataan sana 101 samaan tapaan kuin esimerkissä 2.1. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \mod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan. Esimerkin 2.1 mukaan tiedetään kumpi sanoista on väärä ja täten osataan myös korjata virheen.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
@@ -230,6 +234,14 @@ pdfstartview=FitH]{hyperref}
 \begin{proof}
     Toimii
 \end{proof}
+
+\begin{maaritelma}[{\cite[s.~492]{PA}}]
+    Olkoon $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
+    \begin{enumerate}
+        \item Sanojen $u$ ja $v$ elementtien eroavaisuuksien lukumäärää kutsutaan Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
+        \item 
+    \end{enumerate}
+\end{maaritelma}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Supremum jonon raja-arvona}%
