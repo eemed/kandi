@@ -239,7 +239,11 @@ pdfstartview=FitH]{hyperref}
     Olkoon $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
     \begin{enumerate}
         \item Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
-        \item Sanan $u$ Hamming-painolla tarkoitetaan lukumäärää kuinka monta sanan $u$ komponenttia eroaa nollasta.
+        \item Sanan $u$ Hamming-painolla tarkoitetaan niiden komponenttien lukumäärää, jotka eroavat nollasta.
+        \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
+            \[
+                S_r\left(u\right) = \left\{v \in A^n \mid d\left(u, v\right) \le r \right\}
+            \]
     \end{enumerate}
 \end{maaritelma}
 
