@@ -185,15 +185,19 @@ pdfstartview=FitH]{hyperref}
 
     [ Mitä tutkielmassa tehdään ]
 
+    % Me vs Passiivi
+    % aakosto sana koodisana bitti
+    % kunta?
+
 
     [ Edellytykset ]
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \chapter{Lineaariset binääri koodit}\label{ch: Lineaariset binääri koodit}
+    \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
     Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Kutsumme numeroita $n \in \left\{ 0, 1 \right\} = \Zset_2$ biteiksi.
 
-    Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viesti-osa koostuu $k$ bitistä ja korjaus-osa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
+    Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     [KUVA]
     \begin{esimerkki}
         Muodostetaan kaikki mahdolliset $k = 3$ bittiset sanat.
@@ -203,15 +207,15 @@ pdfstartview=FitH]{hyperref}
                 110 & 100 & 101 & 010 \\
             \end{tabular}
         \end{center}
-        Määritelemme sanoihin neljännen bitin $x_4 = (x_1 + x_2 + x_3) \mod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
+        Määrittelemme sanoihin neljännen bitin $x_4 = (x_1 + x_2 + x_3) \mod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
         \[
             C = \left\{ x_1x_2x_3x_4 \mid  x_i \in \left\{0,1\right\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \mod2\right\}
         \]
-        Huomaamme että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
-        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
+        Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
+        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
     \end{esimerkki}
     \begin{esimerkki}
-        Koodataan sana 101 samaan tapaan kuin esimerkissä 2.1. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \mod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan. Esimerkin 2.1 mukaan tiedetään kumpi sanoista on väärä ja täten osataan myös korjata virheen.
+        Koodataan sana 101 samaan tapaan kuin esimerkissä 2.1. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \mod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin 2.1 mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
@@ -222,7 +226,7 @@ pdfstartview=FitH]{hyperref}
             \item Alkiota $u \in  A^n = \underbrace{A \times \cdots \times A}_{\text{n kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
-            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$ \emph{lineaariseksi koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binääri koodiksi}.
+            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$ \emph{lineaariseksi koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
         \end{enumerate}
     \end{maaritelma}
 
@@ -263,11 +267,14 @@ pdfstartview=FitH]{hyperref}
     % New York: Birch and Star, 1990.
 
     \bibitem{PA}
-    Papantonopoulou, A. \emph{Algebra Pure \& Applied}.
+    Papantonopoulou, A.
+    \emph{Algebra Pure \& Applied}.
     Prentice-Hall, 2002
 
     \bibitem{GW}
-    Gilbert, William J., and W. Keith Nicholson. Modern algebra with applications. Vol. 66. John Wiley & Sons, 2004.
+    Gilbert, W. J. \& Nicholson, W. K.
+    \emph{Modern algebra with applications. Vol. 66}.
+    John Wiley & Sons, 2004.
 
 \end{thebibliography}
 
