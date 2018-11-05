@@ -233,48 +233,60 @@ pdfstartview=FitH]{hyperref}
 
     % \begin{lause}\label{thm: kasautumispisteen ympäristössä}
     %     A on B
-% \end{lause}
+    % \end{lause}
 
-% \begin{proof}
+    % \begin{proof}
     % Toimii
-% \end{proof}
+    % \end{proof}
 
-\begin{maaritelma}[{\cite[s.~492]{PA}}]
-    Olkoon $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
-    \begin{enumerate}
-        \item Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
-        \item Sanan $u$ Hamming-painolla tarkoitetaan niiden komponenttien lukumäärää, jotka eroavat nollasta.
-        \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
-            \[
-                S_r\left(u\right) = \left\{v \in A^n \mid d\left(u, v\right) \le r \right\}
-            \]
-    \end{enumerate}
-\end{maaritelma}
+    \begin{maaritelma}[{\cite[s.~492]{PA}}]
+        Olkoon $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
+        \begin{enumerate}
+            \item Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
+            \item Sanan $u$ Hamming-painolla tarkoitetaan niiden komponenttien lukumäärää, jotka eroavat nollasta.
+            \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
+                \[
+                    S_r\left(u\right) = \left\{v \in A^n \mid d\left(u, v\right) \le r \right\}
+                \]
+                kutsutaan sanan $u$ r-ympyräksi.
+            \item Olkoon $C$ koodi vektoriavaruudessa $A^n$. Koodin $C$ minimi etäisyys on
+                \[
+                    d = \min\left\{ d\left(u, w\right) \mid u, w \in C, u \neq w \right\}.
+                \]
+        \end{enumerate}
+    \end{maaritelma}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Supremum jonon raja-arvona}%
-% \label{sec: Supremum jonon raja-arvona}
+     \begin{lause}\label{theorem: Hamming}
+         Olkoon $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
+         \begin{enumerate}
+             \item $wt\left(u\right) = d\left(u, 0\right)$
+             \item $d\left(u, v\right) = wt\left(u - v\right)$
+             \item $d\left(u, v\right) = wt\left(v, u\right)$
+             \item $d\left(u, v\right) = 0$, jos $u = v$
+             \item $d\left(u, w\right) \le d\left(u, v\right) + d\left(v, w\right)$ \quad (kolmioepäyhtälö)
+         \end{enumerate}
+     \end{lause}
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{thebibliography}{9}
-    % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
-    \addcontentsline{toc}{chapter}{\bibname}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{thebibliography}{9}
+        % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
+        \addcontentsline{toc}{chapter}{\bibname}
 
-    % \bibitem{Mathman}
-    % Mathman, Z. \emph{An elementary course in mathematical analysis}.
-    % New York: Birch and Star, 1990.
+        % \bibitem{Mathman}
+        % Mathman, Z. \emph{An elementary course in mathematical analysis}.
+        % New York: Birch and Star, 1990.
 
-    \bibitem{PA}
-    Papantonopoulou, A.
-    \emph{Algebra Pure \& Applied}.
-    Prentice-Hall, 2002
+        \bibitem{PA}
+        Papantonopoulou, A.
+        \emph{Algebra Pure \& Applied}.
+        Prentice-Hall, 2002
 
-    \bibitem{GW}
-    Gilbert, W. J. \& Nicholson, W. K.
-    \emph{Modern algebra with applications. Vol. 66}.
-    John Wiley & Sons, 2004.
+        \bibitem{GW}
+        Gilbert, W. J. \& Nicholson, W. K.
+        \emph{Modern algebra with applications. Vol. 66}.
+        John Wiley & Sons, 2004.
 
 \end{thebibliography}
 
@@ -291,5 +303,5 @@ Mahdolliset liitteet sijoitetaan tutkielman loppuun.
 %\includepdf[pages={1-4}]{tiedosto.pdf}
 
 
-   \end{document}
-   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
