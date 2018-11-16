@@ -20,6 +20,7 @@
 \usepackage[intlimits]{amsmath}
 %\usepackage{amssymb} % Ei tarvita, kun käytetään makropakettia newtxmath.
 \usepackage{amsthm}
+\usepackage{booktabs}
 
 % Fontteina Times ja Helvetica.
 \usepackage[scale=0.94]{tgheros} % Helvetica tekstifontit.
@@ -104,7 +105,8 @@ pdfstartview=FitH]{hyperref}
 \AtBeginDocument{\renewcommand*{\bibname}{Lähteet}}
 
 % Komento \Kuukausi tulostaa nykyisen kuukauden nimen isolla alkukirjaimella kirjoitettuna.
-\newcommand*{\Kuukausi}{\ifcase\ \month\ \or\ Tammi\or\ Helmi\or\ Maalis\or\ Huhti\or\ Touko\or\ Kesä\or\ Heinä\or\ Elo\or\ Syys\or\ Loka\or\ Marras\or\ Joulu\fi kuu}
+% \newcommand*{\Kuukausi}{\ifcase\ \month\ \or\ Tammi\or\ Helmi\or\ Maalis\or\ Huhti\or\ Touko\or\ Kesä\or\ Heinä\or\ Elo\or\ Syys\or\ Loka\or\ Marras\or\ Joulu\fi kuu}
+\newcommand*{\Kuukausi}{\ifcase\month\or{}Tammi\or{}Helmi\or{}Maalis\or{}Huhti\or{}Touko\or{}Kesä\or{}Heinä\or{}Elo\or{}Syys\or{}Loka\or{}Marras\or{}Joulu\fi kuu}
 
     % Joitain komentoja matemaattisia merkintöjä varten:
     \newcommand*{\Nset}{\mathbb{N}}  % luonnollisten lukujen joukko
@@ -311,7 +313,7 @@ pdfstartview=FitH]{hyperref}
         Listataan sitten uudelleen kaikki vektoriavaruuden $A^3$ sanat ja niiden koodisanat koodissa $C \subseteq A^6$.
         \begin{center}
             \begin{tabular}[t]{ll}
-                sana & koodisana \\ \hline
+                sana & koodisana \\ \toprule
                 000 & 000000\\
                 001 & 001011\\
                 011 & 011110\\
@@ -342,7 +344,7 @@ pdfstartview=FitH]{hyperref}
         \bibitem{GW}
         Gilbert, W. J. \& Nicholson, W. K.
         \emph{Modern algebra with applications. Vol. 66}.
-        John Wiley & Sons, 2004.
+        John Wiley \& Sons, 2004.
 
 \end{thebibliography}
 
