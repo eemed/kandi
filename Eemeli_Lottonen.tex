@@ -211,7 +211,7 @@ pdfstartview=FitH]{hyperref}
         \[
             C = \left\{ x_1x_2x_3x_4 \mid  x_i \in \left\{0,1\right\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \mod2\right\}
         \]
-        Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
+        Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
         Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
@@ -230,7 +230,7 @@ pdfstartview=FitH]{hyperref}
         \end{enumerate}
     \end{maaritelma}
 
-
+    % TODO esimerkki aliavaruuden todisatamisesta
 
     % \begin{lause}\label{thm: kasautumispisteen ympäristössä}
     %     A on B
@@ -250,12 +250,15 @@ pdfstartview=FitH]{hyperref}
                     S_r\left(u\right) = \left\{v \in A^n \mid d\left(u, v\right) \le r \right\}
                 \]
                 kutsutaan sanan $u$ r-palloksi.
-            \item Olkoon $C$ koodi vektoriavaruudessa $A^n$. Koodin $C$ minimi etäisyys on
+            \item Olkoon $C$ koodi vektoriavaruudessa $A^n$. Koodin $C$ minimietäisyys on
                 \[
                     d = \min\left\{ d\left(u, w\right) \mid u, w \in C, u \neq w \right\}.
                 \]
         \end{enumerate}
     \end{maaritelma}
+
+    % TODO onks tää ok ?
+    \clearpage
 
     \begin{lause}[{\cite[s.~492]{PA}}]\label{lause:Hamming}
         Olkoon $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
@@ -271,9 +274,9 @@ pdfstartview=FitH]{hyperref}
     % Miksi tämä ei toimi normaalisti
     \begin{proof}\cite[s.~492]{PA}\label{tod: Hamming}
         \begin{enumerate}
-            \item Tämä seuraa suoraan määritelmän \hyperref[maar:perus]{\ref{maar:perus}} kohdista~\ref{kht:etaisyys} ja~\ref{kht:paino}.
+            \item Tämä seuraa suoraan \hyperref[maar:perus]{määritelmän~\ref{maar:perus}} kohdista~\ref{kht:etaisyys} ja~\ref{kht:paino}.
             \item Sanan $u - v$ komponentti kohdassa $i$ on 1 jos sanat $u$ ja $v$ eroavat komponentissa $i$. Nyt määritelmän perusteella $wt\left(u - v\right) = d\left(u, v\right)$.
-            \item Tämä seuraa suoraan määritelmän \hyperref[maar:perus]{\ref{maar:perus}} kohdasta~\ref{kht:etaisyys}.
+            \item Tämä seuraa suoraan \hyperref[maar:perus]{määritelmän~\ref{maar:perus}} kohdasta~\ref{kht:etaisyys}.
             \item Sanojen $u$ ja $v$ etäisyys $d\left(u, v\right) = 0$ jos sanojen $u$ ja $v$ kaikki komponentit kohdassa $i$ ovat samoja, kun $1 \le i \le n$.
             \item Olkoon $x = u - v$ ja $y = v - w$. Nyt lauseen~\ref{lause:Hamming} kohdan~\ref{kht:etaisyyspaino} nojalla epäyhtälön vasemmasta puolesta saadaan
                 \[
@@ -290,14 +293,35 @@ pdfstartview=FitH]{hyperref}
                 \]
                 Olkoon $x_i$ ja $y_i$ sanojen $x$ ja $y$ kohdassa $i$ olevia komponentteja. Olkoon myös sana $z = x + y$ ja sen kohdassa $i$ oleva komponentti $z_i$. Huomaamme, että  
                 \[
-                    wt\left(x + y\right) = \sum_{1 \le i \le n} z_i \qquad wt\left(x\right) = \sum_{1 \le i \le n} x_i \qquad wt\left(y\right) = \sum_{1 \le i \le n} y_i \text{.}
+                    wt\left(x + y\right) = \sum_{i = 1}^n z_i \qquad wt\left(x\right) = \sum_{i =1}^n x_i \qquad wt\left(y\right) = \sum_{i = 1}^n y_i \text{.}
                 \]
                 Riittää siis todistaa, että $z_i \le x_i + y_i$ kaikilla $1 \le i \le n$. Tämä seuraa kuitenkin suoraan siitä että $z_i = x_i + y_i \mod 2$.
         \end{enumerate}
-
-        \begin{esimerkki}
-        \end{esimerkki}
     \end{proof}
+
+    \begin{esimerkki}
+        Oletetaan että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Muodostetaan seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$. Nyt oikea koodisana on se, jonka etäisyys vastaanotettuun koodisanaan on 1. \hyperref[esim:3bitsanat]{Esimerkissä~\ref{esim:3bitsanat}} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
+        \begin{gather*}
+            x_1x_2x_3x_4x_5x_6 \in C \text{, jos} \\
+            x_4 = x_1 + x_2 \\
+            x_5 = x_1 + x_3 \\
+            x_6 = x_2 + x_3
+        \end{gather*}
+        % TODO Tähän se aliavaruus testi
+        Listataan sitten uudelleen kaikki vektoriavaruuden $A^3$ sanat ja niiden koodisanat koodissa $C \subseteq A^6$.
+        \begin{center}
+            \begin{tabular}[t]{ll}
+                000 \\
+                001 \\
+                011 \\
+                111 \\
+                110 \\
+                100 \\
+                101 \\
+                010 \\
+            \end{tabular}
+        \end{center}
+    \end{esimerkki}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
