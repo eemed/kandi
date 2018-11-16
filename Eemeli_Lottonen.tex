@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+% 
 % Tampereen yliopisto
 % Luonnontieteiden tiedekunta
 % Matematiikka
@@ -195,11 +195,11 @@ pdfstartview=FitH]{hyperref}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Kutsumme numeroita $n \in \left\{ 0, 1 \right\} = \Zset_2$ biteiksi.
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita $n \in \left\{ 0, 1 \right\} = \Zset_2$ kutsutaan biteiksi.
 
     Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     [KUVA]
-    \begin{esimerkki}
+    \begin{esimerkki}\label{esim:3bitsanat}
         Muodostetaan kaikki mahdolliset $k = 3$ bittiset sanat.
         \begin{center}
             \begin{tabular}[t]{llll}
@@ -214,21 +214,22 @@ pdfstartview=FitH]{hyperref}
         Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
         Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
     \end{esimerkki}
-    \begin{esimerkki}
-        Koodataan sana 101 samaan tapaan kuin esimerkissä 2.1. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \mod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin 2.1 mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
+    \begin{esimerkki}\label{esim:3bitsanatjatko}
+        Koodataan sana 101 samaan tapaan kuin \hyperref[esim:3bitsanat]{esimerkissä~\ref{esim:3bitsanat}}. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \mod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. \hyperref[esim:3bitsanat]{Esimerkin~\ref{esim:3bitsanat}} mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
     \begin{maaritelma}[{\cite[s.~491]{PA}}]
-        Olkoon $A$ jokin äärellinen joukko, kutsumme joukkoa $A$ \emph{aakostoksi}.
+        Olkoon $A$ jokin äärellinen joukko, kutsumme joukkoa $A$ \emph{aakkostoksi}.
 
         \begin{enumerate}
-            \item Alkiota $u \in  A^n = \underbrace{A \times \cdots \times A}_{\text{n kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakoston $A$ alkioista.
+            \item Alkiota $u \in  A^n = \underbrace{A \times \cdots \times A}_{\text{n kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakkoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
-            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$ \emph{lineaariseksi koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
+            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
         \end{enumerate}
     \end{maaritelma}
+
 
 
     % \begin{lause}\label{thm: kasautumispisteen ympäristössä}
@@ -239,16 +240,16 @@ pdfstartview=FitH]{hyperref}
     % Toimii
     % \end{proof}
 
-    \begin{maaritelma}[{\cite[s.~492]{PA}}]
+    \begin{maaritelma}[{\cite[s.~492]{PA}}]\label{maar:perus}
         Olkoon $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
-            \item Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
-            \item Sanan $u$ Hamming-painolla tarkoitetaan niiden komponenttien lukumäärää, jotka eroavat nollasta.
+            \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming etäisyydeksi ja sitä merkitään $d(u,v)$.
+            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$ niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään $wt\left(u\right)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
                 \[
                     S_r\left(u\right) = \left\{v \in A^n \mid d\left(u, v\right) \le r \right\}
                 \]
-                kutsutaan sanan $u$ r-ympyräksi.
+                kutsutaan sanan $u$ r-palloksi.
             \item Olkoon $C$ koodi vektoriavaruudessa $A^n$. Koodin $C$ minimi etäisyys on
                 \[
                     d = \min\left\{ d\left(u, w\right) \mid u, w \in C, u \neq w \right\}.
@@ -256,17 +257,47 @@ pdfstartview=FitH]{hyperref}
         \end{enumerate}
     \end{maaritelma}
 
-     \begin{lause}\label{theorem: Hamming}
-         Olkoon $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
-         \begin{enumerate}
-             \item $wt\left(u\right) = d\left(u, 0\right)$
-             \item $d\left(u, v\right) = wt\left(u - v\right)$
-             \item $d\left(u, v\right) = wt\left(v, u\right)$
-             \item $d\left(u, v\right) = 0$, jos $u = v$
-             \item $d\left(u, w\right) \le d\left(u, v\right) + d\left(v, w\right)$ \quad (kolmioepäyhtälö)
-         \end{enumerate}
-     \end{lause}
+    \begin{lause}[{\cite[s.~492]{PA}}]\label{lause:Hamming}
+        Olkoon $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
+        \begin{enumerate}
+            \item $wt\left(u\right) = d\left(u, 0\right)$
+            \item\label{kht:etaisyyspaino} $d\left(u, v\right) = wt\left(u - v\right)$
+            \item $d\left(u, v\right) = wt\left(v, u\right)$
+            \item $d\left(u, v\right) = 0$, jos $u = v$
+            \item $d\left(u, w\right) \le d\left(u, v\right) + d\left(v, w\right)$ \quad (kolmioepäyhtälö)
+        \end{enumerate}
+    \end{lause}
 
+    % Miksi tämä ei toimi normaalisti
+    \begin{proof}\cite[s.~492]{PA}\label{tod: Hamming}
+        \begin{enumerate}
+            \item Tämä seuraa suoraan määritelmän \hyperref[maar:perus]{\ref{maar:perus}} kohdista~\ref{kht:etaisyys} ja~\ref{kht:paino}.
+            \item Sanan $u - v$ komponentti kohdassa $i$ on 1 jos sanat $u$ ja $v$ eroavat komponentissa $i$. Nyt määritelmän perusteella $wt\left(u - v\right) = d\left(u, v\right)$.
+            \item Tämä seuraa suoraan määritelmän \hyperref[maar:perus]{\ref{maar:perus}} kohdasta~\ref{kht:etaisyys}.
+            \item Sanojen $u$ ja $v$ etäisyys $d\left(u, v\right) = 0$ jos sanojen $u$ ja $v$ kaikki komponentit kohdassa $i$ ovat samoja, kun $1 \le i \le n$.
+            \item Olkoon $x = u - v$ ja $y = v - w$. Nyt lauseen~\ref{lause:Hamming} kohdan~\ref{kht:etaisyyspaino} nojalla epäyhtälön vasemmasta puolesta saadaan
+                \[
+                    d\left(u,w\right) = wt\left(u - w\right) = wt\left(x + y\right) \text{.}
+                \]
+                Samoin oikeasta puolesta saadaan
+                \begin{gather*}
+                    d\left(u,v\right) = wt\left(u - v\right) = wt\left(x\right) \text{~ja} \\
+                    d\left(v,w\right) = wt\left(v - w\right) = wt\left(y\right) \text{.}
+                \end{gather*}
+                Todistettava epäyhtälö on siis
+                \[
+                    wt\left(x + y\right) \le wt\left(x\right) + wt\left(y\right) \text{.}
+                \]
+                Olkoon $x_i$ ja $y_i$ sanojen $x$ ja $y$ kohdassa $i$ olevia komponentteja. Olkoon myös sana $z = x + y$ ja sen kohdassa $i$ oleva komponentti $z_i$. Huomaamme, että  
+                \[
+                    wt\left(x + y\right) = \sum_{1 \le i \le n} z_i \qquad wt\left(x\right) = \sum_{1 \le i \le n} x_i \qquad wt\left(y\right) = \sum_{1 \le i \le n} y_i \text{.}
+                \]
+                Riittää siis todistaa, että $z_i \le x_i + y_i$ kaikilla $1 \le i \le n$. Tämä seuraa kuitenkin suoraan siitä että $z_i = x_i + y_i \mod 2$.
+        \end{enumerate}
+
+        \begin{esimerkki}
+        \end{esimerkki}
+    \end{proof}
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
