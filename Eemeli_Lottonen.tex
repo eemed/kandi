@@ -277,7 +277,7 @@ pdfstartview=FitH]{hyperref}
     \begin{proof}\cite[s.~492]{PA}\label{tod: Hamming}
         \begin{enumerate}
             \item Tämä seuraa suoraan \hyperref[maar:perus]{määritelmän~\ref{maar:perus}} kohdista~\ref{kht:etaisyys} ja~\ref{kht:paino}.
-            \item Sanan $u - v$ komponentti kohdassa $i$ on 1 jos sanat $u$ ja $v$ eroavat komponentissa $i$. Nyt määritelmän perusteella $wt\left(u - v\right) = d\left(u, v\right)$.
+            \item Sanan $u - v$ komponentti kohdassa $i$ on 1, jos sanat $u$ ja $v$ eroavat komponentissa~$i$. Nyt määritelmän perusteella $wt\left(u - v\right) = d\left(u, v\right)$.
             \item Tämä seuraa suoraan \hyperref[maar:perus]{määritelmän~\ref{maar:perus}} kohdasta~\ref{kht:etaisyys}.
             \item Sanojen $u$ ja $v$ etäisyys $d\left(u, v\right) = 0$ jos sanojen $u$ ja $v$ kaikki komponentit kohdassa $i$ ovat samoja, kun $1 \le i \le n$.
             \item Olkoon $x = u - v$ ja $y = v - w$. Nyt lauseen~\ref{lause:Hamming} kohdan~\ref{kht:etaisyyspaino} nojalla epäyhtälön vasemmasta puolesta saadaan
@@ -324,6 +324,8 @@ pdfstartview=FitH]{hyperref}
                 010 & 010101\\
             \end{tabular}
         \end{center}
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d\left(u,v\right) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa funktiossa, jotka määrittelimme koodin $C$ tarkastuskomponenteille $x_4, x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
+        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d\left(u, v\right) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa funktioista, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
     \end{esimerkki}
 
 
