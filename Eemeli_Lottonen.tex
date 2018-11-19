@@ -169,9 +169,6 @@ pdfstartview=FitH]{hyperref}
     % Lasketaan nimiösivu mukaan sivunumerointiin:
     \setcounter{page}{2}
 
-    %%% Komento \cleardoublepage saa tässä aikaan tavallisen sivunvaihdon, koska komennon \documentclass kanssa on käytetty optiota oneside. Seuraavan komennon \  tuottama välilyönti tulostuu siksi seuraavalle sivulle. Mitään muuta kyseiselle sivulle ei sitten tulostukaan, koska sitä seuraava komento \tableofcontents aloittaa myös uuden sivun. Poista siksi komento \  , jottei tähän tulostuisi ylimääräistä tyhjää sivua. Jos käytetään dokumenttiluokan optiota twoside, saa komento \cleardoublepage aikaan sen, että seuraava sivu (sisällysluettelo) alkaa aukeaman oikeanpuoleiselta sivulta. Tällöin siis automaattisesti tulostuu tyhjä sivu nimiösivun ja sisällysluettelon väliin.
-    %% 
-    %%%  chktex valittaa jos loppuu suoraan niin laitoin noin
     \cleardoublepage{}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -193,10 +190,6 @@ pdfstartview=FitH]{hyperref}
 
     [ Mitä tutkielmassa tehdään ]
 
-    % Me vs Passiivi
-    % aakosto sana koodisana bitti
-    % kunta?
-
 
     [ Edellytykset ]
 
@@ -204,7 +197,6 @@ pdfstartview=FitH]{hyperref}
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
     Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita 
-    %%% Komennot \left ja \right ovat alla ja muuallakin tässä dokumentissa tarpeettomat. Komentoja \left ja \right käytetään silloin, kun tarvitaan tavallista suurempia sulkeita, tai silloin, kun sulkeita käytetään väärin päin: $\left]-\infty,\infty\right[$.
     $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi.
 
     Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
@@ -218,11 +210,8 @@ pdfstartview=FitH]{hyperref}
             \end{tabular}
         \end{center}
         Määrittelemme sanoihin neljännen bitin 
-        %%% Korvaa tässä ja muallakin komento \mod komennolla \bmod.
         $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
         \[
-            %%% Kun joukko esitetään joukon alkiot määrittelevän säännön avulla, kuten tässä, on LaTeXissa tapana merkitä pystyviivaa komennolla \mid ja lisätä aaltosulkeiden sisäpuolelle hieman tyhjää tilaa komennoilla \,. Lisää siis komennot \, ulompien aaltosulkeiden sisäpuolelle. Tee vastaava korjaus muuallakin.
-            %%% Poista tarpeettomat komennot \left ja \right ja lisää piste virkkeen (kaavarivin) loppuun.
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
         \]
         Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
@@ -230,7 +219,6 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin 
-        %%% Viite esimerkkiin 2.1 on yksinkertaisempi tehdä seuraavasti: esimerkissä~\ref{esim:3bitsanat}. Makropaketti hyperref tekee tällöin numerosta 2.1 automaattisesti hyperlinkin. Komennolla \hyperref linkin teksti voidaan valita vapaasti. Mikäli muutat viitteen toteutusta tässä, tee vastaava muutos muuallakin.
         esimerkissä~\ref{esim:3bitsanat}. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
     \end{esimerkki}
 
@@ -240,8 +228,7 @@ pdfstartview=FitH]{hyperref}
 
         \begin{enumerate}
             \item Alkiota $u \in  A^n = \underbrace{A \times \cdots \times A}_{
-                    %%% \text{$n$ kappaletta}}$
-                \text{n kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakkoston $A$ alkioista.
+                \text{$n$ kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakkoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
             \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
@@ -260,20 +247,15 @@ pdfstartview=FitH]{hyperref}
 
     \section{Hamming etäisyys ja -paino}
     \begin{maaritelma}[{\cite[s.~492]{PA}}]\label{maar:perus}
-        %%% Olkoot (yksikössä 'olkoon' ja monikossa 'olkoot')
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
             \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming etäisyydeksi ja sitä merkitään $d(u,v)$.
             \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$ niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään 
-                %%% Määrittele dokumentin esittelyosassa uusi komento \wt seuraavasti
-                %%% \DeclareMathOperator{\wt}{wt}
-                %%% Korvaa tämän jälkeen alla ja muuallakin wt komennolla \wt.
                 $\wt(u)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
                 \[
                     S_r(u) = \{\,v \in A^n \mid d(u, v) \le r \,\}
                 \]
-                %%% $r$-palloksi
                 kutsutaan sanan $u$ $r$-palloksi.
             \item Olkoon $C$ koodi vektoriavaruudessa $A^n$. Koodin $C$ minimietäisyys on
                 \[
@@ -283,10 +265,8 @@ pdfstartview=FitH]{hyperref}
     \end{maaritelma}
 
     % TODO onks tää ok ?
-    %%% Poista komento \clearpage. Manuaalisia sivunvaihtoja voi tarvittaessa lisätä sitten, kun dokumentin sisältöön ei enää tule mitään muutoksia. Ehdollisen sivunvaihdon voi tehdä komennolla \pagebreak, jonka valinnainen argumentti voi saada arvot 0,1,2,3,4. Komento \pagebreak ilman valinnaista argumenttia on sama kuin \pagebreak[4], joka tekee sivunvaihdon aina. Esimerkiksi tässä kohtaa \pagebreak[3] tekee sivunvaihdon, mutta jos komennon \pagebreak[3] antaa lähempänä sivun yläreunaa, ei sivunvaihtoa tehdä.
 
     \begin{lause}\label{lause:Hamming}
-        %%% Olkoot
         Olkoot $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
         \begin{enumerate}
             \item\label{kht:painoetaisyys} $\wt(u) = d(u, 0)$
@@ -297,13 +277,7 @@ pdfstartview=FitH]{hyperref}
         \end{enumerate}
     \end{lause}
 
-    % Miksi tämä ei toimi normaalisti
-    %%% Jos lause ja sen todistus on saatu samasta lähteestä, niin lähdeviite on tapana ilmoittaa vain todistuksen yhteydessä. Lähdeviitteen voi esittää todistuksen otsikossa seuraavasti:
-    %%% \begin{proof}[Todistus \upshape(vrt. {\cite[s.~492]{PA}})]\label{tod: Hamming}
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~492]{PA}})]\label{tod: Hamming}
-        %\begin{proof}\cite[s.~492]{PA}\label{tod: Hamming}
-        %%% Todistuksen kohdat voisi luetelmaympäristön enumerate sijaan esittää tavallisina tekstikappaleina varsinkin, kun viidennen kohdan todistus on selvästi muita pitempi.
-
         Lauseen~\ref{lause:Hamming} kohta~\ref{kht:painoetaisyys} seuraa suoraan määritelmän~\ref{maar:perus} kohdista~\ref{kht:etaisyys} ja~\ref{kht:paino}.
 
         Kohdassa~\ref{kht:etaisyyspaino} sanan $u - v$ komponentti kohdassa $i$ on 1, jos sanat $u$ ja $v$ eroavat komponentissa~$i$. Nyt määritelmän perusteella saadaan $\wt(u - v) = d(u, v)$.
@@ -314,7 +288,6 @@ pdfstartview=FitH]{hyperref}
 
         Kohdan~\ref{kht:kolmioey} todistus on hieman pidempi kuin muut. Olkoot $x = u - v$ ja $y = v - w$. Nyt lauseen~\ref{lause:Hamming} kohdan~\ref{kht:etaisyyspaino} nojalla epäyhtälön vasemmasta puolesta saadaan
         \[
-            %%% Kaavariveillä olevia yksittäisiä välimerkkejä ei tarvitse sijoittaa komennon \text argumenttiin. Korvaa siis alla ja muuallakin \text{.} pelkällä pisteellä.
             d(u,w) = \wt(u - w) = \wt(x + y).
         \]
         Samoin oikeasta puolesta saadaan
@@ -326,30 +299,25 @@ pdfstartview=FitH]{hyperref}
         \[
             \wt(x + y) \le \wt(x) + \wt(y).
         \]
-        %%% Olkoot
         Olkoot $x_i$ ja $y_i$ sanojen $x$ ja $y$ kohdassa $i$ olevia komponentteja. Olkoon myös sana $z = x + y$ ja sen kohdassa $i$ oleva komponentti $z_i$. Huomaamme, että  
         \[
             \wt(x + y) = \sum_{i = 1}^n z_i \qquad \wt(x) = \sum_{i =1}^n x_i \qquad \wt(y) = \sum_{i = 1}^n y_i.
         \]
         Riittää siis todistaa, että $z_i \le x_i + y_i$ kaikilla $1 \le i \le n$. Tämä seuraa kuitenkin suoraan siitä että $z_i = x_i + y_i \bmod 2$.
-        %%% Mikäli käytät ympäristöä enumerate, niin lisää tähän komento \qedhere, joka saa todistuksen päättymisen merkkinä olevan neliön tulostumaan viimeisen rivin oikeaan reunaan. Ilman sitä neliö tulostuu luetelmaa seuraavan rivin loppuun.
     \end{proof}
 
     \begin{esimerkki}
         Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Muodostetaan seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$. Nyt oikea koodisana on se, jonka etäisyys vastaanotettuun koodisanaan on 1. \hyperref[esim:3bitsanat]{Esimerkissä~\ref{esim:3bitsanat}} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
         \begin{gather*}
-            %%% x_1x_2x_3x_4x_5x_6 \in C, \text{ jos} \\
             x_1x_2x_3x_4x_5x_6 \in C, \text{ jos} \\
             x_4 = x_1 + x_2 \\
             x_5 = x_1 + x_3 \\
-            %%% Lisää piste virkkeen (kaavarivin) loppuun.
             x_6 = x_2 + x_3.
         \end{gather*}
         % TODO Tähän se aliavaruus testi
         Listataan sitten uudelleen kaikki vektoriavaruuden $A^3$ sanat ja niiden koodisanat koodissa $C \subseteq A^6$.
         \begin{center}
             \begin{tabular}[t]{ll}
-                %%% Korvaa komento \toprule komennolla \midrule. Makropaketin booktabs komennolla \toprule tehdään taulukon yläreunaan tuleva viiva, komennolla \midrule tehdään taulukon sarakeotsikoiden alle tuleva viiva ja komennolla \bottomrule tehdään taulukon alareunaan tuleva viiva.
                 sana & koodisana \\ \midrule
                 000 & 000000\\
                 001 & 001011\\
@@ -362,13 +330,11 @@ pdfstartview=FitH]{hyperref}
             \end{tabular}
         \end{center}
         Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa funktiossa, jotka määrittelimme koodin $C$ tarkastuskomponenteille 
-        %%% $x_4$, $x_5$ ja $x_6$.
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
+
         Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa funktioista, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
     \end{esimerkki}
 
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
         \addcontentsline{toc}{chapter}{\bibname}
@@ -389,19 +355,4 @@ pdfstartview=FitH]{hyperref}
 
 \end{thebibliography}
 
-
-%%% Jos liitteitä ei ole, niin poista alla oleva liiteosa.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Jos liitteitä on vain yksi, sitä ei tarvitse numeroida:
-% \chapter*{Liite}
-% % Lisätään numeroimaton liite sisällysluetteloon:
-% \addcontentsline{toc}{chapter}{Liite}
-
-% Mahdolliset liitteet sijoitetaan tutkielman loppuun.
-
-% Jos liite on tehty jollain toisella ohjelmalla, niin sen voi liittää tutkielmaan pdf-muodossa makropaketin pdfpages komennolla \includepdf. Poista tällöin edelliset komennot \chapter*{Liite} ja \addcontentsline{toc}{chapter}{Liite} ja lisää liitteen alkuun otsikko ja tarvittaessa liitteen kuvaus esimerkiksi samalla ohjelmalla, jolla liitekin on tehty.
-%\includepdf[pages={1-4}]{tiedosto.pdf}
-
-
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
