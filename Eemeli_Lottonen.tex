@@ -264,8 +264,6 @@ pdfstartview=FitH]{hyperref}
         \end{enumerate}
     \end{maaritelma}
 
-    % TODO onks tää ok ?
-
     \begin{lause}\label{lause:Hamming}
         Olkoot $u$, $v$ ja $w$ sanoja vektoriavaruudessa $A^n$, missä $A = \Zset_2$. Silloin seuraavat ehdot pätevät:
         \begin{enumerate}
@@ -307,7 +305,7 @@ pdfstartview=FitH]{hyperref}
     \end{proof}
 
     \begin{esimerkki}
-        Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Muodostetaan seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$. Nyt oikea koodisana on se, jonka etäisyys vastaanotettuun koodisanaan on 1. \hyperref[esim:3bitsanat]{Esimerkissä~\ref{esim:3bitsanat}} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
+        Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Muodostetaan seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$. Nyt oikea koodisana on se, jonka etäisyys vastaanotettuun koodisanaan on 1. Esimerkissä~\ref{esim:3bitsanat} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
         \begin{gather*}
             x_1x_2x_3x_4x_5x_6 \in C, \text{ jos} \\
             x_4 = x_1 + x_2 \\
@@ -329,11 +327,15 @@ pdfstartview=FitH]{hyperref}
                 010 & 010101\\
             \end{tabular}
         \end{center}
-        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa funktiossa, jotka määrittelimme koodin $C$ tarkastuskomponenteille 
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille 
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa funktioista, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
+        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
     \end{esimerkki}
+
+    \begin{maaritelma}\label{maar:nkkoodi}
+        Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan parillisuus yhtälöiksi.
+    \end{maaritelma}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
