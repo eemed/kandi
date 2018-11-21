@@ -250,7 +250,7 @@ pdfstartview=FitH]{hyperref}
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
             \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming etäisyydeksi ja sitä merkitään $d(u,v)$.
-            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$ niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään 
+            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään 
                 $\wt(u)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
                 \[
@@ -305,7 +305,9 @@ pdfstartview=FitH]{hyperref}
     \end{proof}
 
     \begin{esimerkki}
-        Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Muodostetaan seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$. Nyt oikea koodisana on se, jonka etäisyys vastaanotettuun koodisanaan on 1. Esimerkissä~\ref{esim:3bitsanat} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
+        Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Määritellään seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$.
+        
+        Esimerkissä~\ref{esim:3bitsanat} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
         \begin{gather*}
             x_1x_2x_3x_4x_5x_6 \in C, \text{ jos} \\
             x_4 = x_1 + x_2 \\
@@ -330,12 +332,19 @@ pdfstartview=FitH]{hyperref}
         Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille 
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
+        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. 
+        
+        Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
+
+        Oletetaan, että lähetettävä sana on 001 ja sen vastaava koodisana $u = 011110 \in C$. 
+        Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaan otettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
     \end{esimerkki}
 
     \begin{maaritelma}\label{maar:nkkoodi}
         Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan parillisuus yhtälöiksi.
     \end{maaritelma}
+
+    \chapter{Virheenkorjaaminen ja sivuluokkapurku}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
