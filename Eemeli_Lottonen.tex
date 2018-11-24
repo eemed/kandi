@@ -344,17 +344,36 @@ pdfstartview=FitH]{hyperref}
         Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan parillisuus yhtälöiksi.
     \end{maaritelma}
 
-    \chapter{Virheenkorjaaminen ja sivuluokkapurku}
+    \chapter{Virheenkorjaaminen ja sivuluokkadekoodaus}
 
     \begin{lause}\label{lause:nncorrection}
-        Olkoon koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Jos käytämme lähin naapuri purkua, sitten kaikille $t \in \Nset$ pätee seuraavat ehdot:
+        Olkoon koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Jos käytämme lähin-naapuri dekoodausta, niin kaikille $t \in \Nset$ pätee seuraavat ehdot:
         \begin{enumerate}
-            \item Jos $t + 1 \le d$, niin 
+            \item\label{kht:vtunnistus} Koodi $C$ voi tunnistaa ainakin $t$ kappaletta virheitä, jos $t + 1 \le d$.
+            \item\label{kht:vkorjaus} Koodi $C$ voi korjata ainakin $t$ kappaletta virheitä, jos $2t + 1 \le d$.
         \end{enumerate}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~494]{PA}})]\label{tod:nncorrection}
+        Aloitetaan lauseen~\ref{lause:nncorrection} kohdasta~\ref{kht:vtunnistus}. Olkoot koodi $C \in A^n$ ja sen minimietäisyys $d$. Valitaan sitten koodisana $u \in C$. Nyt pallo $S_t(u)$ sisältää kaikki mahdolliset vastaanotetut sanat, jos lähetetty koodisana oli $u$ ja välityksessä tapahtui enintään $t$ virhettä. Jos koodin $C$ minimietäisyys $d < t$, niin pallo $S_t(u)$ sisältää vain koodisanan $u$. Täten jos virheitä tapahtuu enintään $t$ kappaletta, niin vastaanotettu sana $w$ ei ole koodisana. Näin voimme tunnistaa, jos virheitä on tapahtunut enintään $t$ kappaletta.
+
+        Kohdassa~\ref{kht:vkorjaus} aloitetaan samalla tavalla. Olkoot koodi $C \in A^n$ ja sen minimietäisyys $d$. Valitaan sitten kaksi koodisanaa $u, v \in C$ siten, että $u \neq v$. Jos minimietäisyydelle pätee $2t < d$, niin vastaanotettu sana $w$ ei voi sisältyä molempiin palloihin $S_t(u)$ ja $S_t(v)$. Tämä voidaan osoittaa olettamalla ensin, että sana $w$ kuuluu molempiin palloihin. Nyt kolmioepäyhtälöstä saadaan
+        \[
+            d(u,v) \le d(u,w) + d(w, v) \le t + t < d,
+        \]
+        joka on ristiriidassa minimietäisyyden määritelmän kanssa. Täten vastaanotettu sana $w$ voidaan aina korjata lähimpään koodisanaan.
     \end{proof}
+
+    \begin{esimerkki}
+        TODO
+    \end{esimerkki}
+
+    \begin{lause}\label{lause:HammingBound}
+        Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta.
+        \[
+            2^k = \abs{C} \le \frac{2^n}{\binom{n}{1}+\binom{n}{2}+\binom{n}{3}+\cdots+\binom{n}{t}}
+        \]
+    \end{lause}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
