@@ -372,31 +372,36 @@ pdfstartview=FitH]{hyperref}
     \begin{lause}\label{lause:Hammingrajoitus}
         Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajoitukseksi kutsutaan seuraavaa epäyhtälöä:
         \[
-            2^k = \abs{C} \le \frac{2^n}{\binom{n}{1}+\binom{n}{2}+\binom{n}{3}+\cdots+\binom{n}{t}}
+            2^k = \abs{C} \le \frac{2^n}{\binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\cdots+\binom{n}{t}}
         \]
         missä
         \[
             \binom{n}{b} = \frac{n!}{b!(n-b)!}
         \]
         on binomikerroin ja $\abs{C}$ on koodin $C$ mahtavuus.
-        \begin{proof}[Todistus \upshape(vrt. {\cite[s.495]{PA}})]\label{tod:Hammingrajoitus}
-            Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ mahtavuus $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ mahtavuus on siis
-            \[
-                \abs{S_t(u)} = \binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}.
-            \]
-            Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$. Nyt siis alkioita kaikissa palloissa on yhteensä
-            \[
-                \sum_{u \in C}\abs{S_t(u)} = \abs{S_t(u)}\abs{C}.
-            \]
-            Kuitenkin vektoriavaruudessa $A^n$ alkioita on yhteensä $2^n$ kappaletta, koska $A = \Zset_2$.
-            Tästä seuraa seuraava epäyhtälö:
-            \begin{align*}
-                \abs{S_t(u)}\abs{C} &\le 2^n \\
-                \abs{C} &\le \frac{2^n}{\abs{S_t(u)}} 
-            \end{align*}
-
-        \end{proof}
     \end{lause}
+
+    \begin{proof}[Todistus \upshape(vrt. {\cite[s.495]{PA}})]\label{tod:Hammingrajoitus}
+        Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ mahtavuus $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ mahtavuus on siis
+        \[
+            \abs{S_t(u)} = \binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}.
+        \]
+        Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$. Nyt siis alkioita kaikissa palloissa on yhteensä
+        \[
+            \sum_{u \in C}\abs{S_t(u)} = \abs{S_t(u)}\abs{C}.
+        \]
+        Kuitenkin vektoriavaruudessa $A^n$ alkioita on yhteensä $2^n$ kappaletta, koska $A = \Zset_2$.
+        Tästä seuraa seuraava epäyhtälö:
+        \begin{align*}
+            \abs{S_t(u)}\abs{C} &\le 2^n \\
+            \abs{C} &\le \frac{2^n}{\abs{S_t(u)}} \\
+            \abs{C} &\le \frac{2^n}{\binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}} 
+        \end{align*}
+    \end{proof}
+
+    Olkoon $C$ $(n,k)$-koodi. Nyt vektoriavaruus $\Zset_2^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $\Zset_2^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $\Zset_2^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa.
+    \begin{esimerkki}
+    \end{esimerkki}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
