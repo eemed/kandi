@@ -399,8 +399,16 @@ pdfstartview=FitH]{hyperref}
         \end{align*}
     \end{proof}
 
-    Olkoon $C$ $(n,k)$-koodi. Nyt vektoriavaruus $\Zset_2^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $\Zset_2^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $\Zset_2^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa.
+    Olkoon $C$ $(n,k)$-koodi. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $A^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $A^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa. 
+    
+    Seuraavaksi esittelemme sivuluokkakoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
+    \[
+        u_1 + C, u_2 + C, \dots, u_N + C,
+    \]
+    missä $N = 2^{n-k}$. Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan.
+
     \begin{esimerkki}
+        Olkoon joukko $\{\,1000,\, 0100,\, 0001\,\}$ kantana $(4,2)$-koodille $C$. Muodostetaan 
     \end{esimerkki}
 
     \begin{thebibliography}{9}
