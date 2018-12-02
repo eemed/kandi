@@ -399,16 +399,16 @@ pdfstartview=FitH]{hyperref}
         \end{align*}
     \end{proof}
 
-    Olkoon $C$ $(n,k)$-koodi. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $A^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $A^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa. 
+    Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $A^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $A^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
     
-    Seuraavaksi esittelemme sivuluokkakoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
+    Seuraavaksi esittelemme sivuluokkadekoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
     \[
         u_1 + C, u_2 + C, \dots, u_N + C,
     \]
-    missä $N = 2^{n-k}$. Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan.
+    missä $N = 2^{n-k}$. Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan. Nyt siis sana $w \in u_i + C$, joten se voidaan dekoodata takaisin koodisanaksi vähentämällä siitä sana $u_i$. Dekoodattu sana on siis $w - u_i \in C$. Tämä dekoodaus voidaan helposti toteuttaa muodostamalla koodille $C$ \emph{standardi taulukko}.
 
     \begin{esimerkki}
-        Olkoon joukko $\{\,1000,\, 0100,\, 0001\,\}$ kantana $(4,2)$-koodille $C$. Muodostetaan 
+        Olkoon joukko $\{\,1000,\, 0100,\, 0001\,\}$ kantana $(4,2)$-koodille $C$. Muodostetaan koodille $C$ standardi taulukko.
     \end{esimerkki}
 
     \begin{thebibliography}{9}
