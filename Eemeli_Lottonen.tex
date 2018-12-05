@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 % Tampereen yliopisto
 % Luonnontieteiden tiedekunta
 % Matematiikka
@@ -175,7 +175,7 @@ pdfstartview=FitH]{hyperref}
     % Sisällysluettelo.
     \tableofcontents
 
-    %%% Poista välilyöntikomento \ 
+    %%% Poista välilyöntikomento \
     \cleardoublepage{}
 
 
@@ -196,7 +196,7 @@ pdfstartview=FitH]{hyperref}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita 
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita
     $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi.
 
     Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
@@ -209,7 +209,7 @@ pdfstartview=FitH]{hyperref}
                 110 & 100 & 101 & 010 \\
             \end{tabular}
         \end{center}
-        Määrittelemme sanoihin neljännen bitin 
+        Määrittelemme sanoihin neljännen bitin
         $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
         \[
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
@@ -218,7 +218,7 @@ pdfstartview=FitH]{hyperref}
         Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
-        Koodataan sana 101 samaan tapaan kuin 
+        Koodataan sana 101 samaan tapaan kuin
         esimerkissä~\ref{esim:3bitsanat}. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
     \end{esimerkki}
 
@@ -250,7 +250,7 @@ pdfstartview=FitH]{hyperref}
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
             \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming etäisyydeksi ja sitä merkitään $d(u,v)$.
-            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään 
+            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään
                 $\wt(u)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
                 \[
@@ -297,7 +297,7 @@ pdfstartview=FitH]{hyperref}
         \[
             \wt(x + y) \le \wt(x) + \wt(y).
         \]
-        Olkoot $x_i$ ja $y_i$ sanojen $x$ ja $y$ kohdassa $i$ olevia komponentteja. Olkoon myös sana $z = x + y$ ja sen kohdassa $i$ oleva komponentti $z_i$. Huomaamme, että  
+        Olkoot $x_i$ ja $y_i$ sanojen $x$ ja $y$ kohdassa $i$ olevia komponentteja. Olkoon myös sana $z = x + y$ ja sen kohdassa $i$ oleva komponentti $z_i$. Huomaamme, että
         \[
             \wt(x + y) = \sum_{i = 1}^n z_i \qquad \wt(x) = \sum_{i =1}^n x_i \qquad \wt(y) = \sum_{i = 1}^n y_i.
         \]
@@ -306,7 +306,7 @@ pdfstartview=FitH]{hyperref}
 
     \begin{esimerkki}
         Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Määritellään seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$.
-        
+
         Esimerkissä~\ref{esim:3bitsanat} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
         \begin{gather*}
             x_1x_2x_3x_4x_5x_6 \in C, \text{ jos} \\
@@ -329,14 +329,14 @@ pdfstartview=FitH]{hyperref}
                 010 & 010101\\
             \end{tabular}
         \end{center}
-        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille 
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. 
-        
+        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
+
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
-        Oletetaan, että lähetettävä sana on 001 ja sen vastaava koodisana $u = 011110 \in C$. 
+        Oletetaan, että lähetettävä sana on 001 ja sen vastaava koodisana $u = 011110 \in C$.
         Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaan otettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
     \end{esimerkki}
 
@@ -395,12 +395,12 @@ pdfstartview=FitH]{hyperref}
         \begin{align*}
             \abs{S_t(u)}\abs{C} &\le 2^n \\
             \abs{C} &\le \frac{2^n}{\abs{S_t(u)}} \\
-            \abs{C} &\le \frac{2^n}{\binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}} 
+            \abs{C} &\le \frac{2^n}{\binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}}
         \end{align*}
     \end{proof}
 
     Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $A^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $A^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
-    
+
     Seuraavaksi esittelemme sivuluokkadekoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
     \[
         u_1 + C, u_2 + C, \dots, u_N + C,
@@ -408,7 +408,18 @@ pdfstartview=FitH]{hyperref}
     missä $N = 2^{n-k}$. Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan. Nyt siis sana $w \in u_i + C$, joten se voidaan dekoodata takaisin koodisanaksi vähentämällä siitä sana $u_i$. Dekoodattu sana on siis $w - u_i \in C$. Tämä dekoodaus voidaan helposti toteuttaa muodostamalla koodille $C$ \emph{standardi taulukko}.
 
     \begin{esimerkki}
-        Olkoon joukko $\{\,1000,\, 0100,\, 0001\,\}$ kantana $(4,2)$-koodille $C$. Muodostetaan koodille $C$ standardi taulukko.
+        Olkoon $(4,2)$-koodi $C = \{\,0000,\, 0110,\, 1011\,,1101\,\}$. Muodostetaan koodille $C$ standardi taulukko.
+        \begin{center}
+            \begin{tabular}{llll}
+                0000 & 0110 & 1011 & 1101 \\ \midrule
+                1000 & 1110 & 0011 & 0101 \\
+                0100 & 0010 & 1111 & 1001 \\
+                0001 & 0111 & 1010 & 1100
+            \end{tabular}
+        \end{center}
+        Ensimmäisessä rivissä on kaikki koodin $C$ koodisanat ja ensimmäisessä sarakkeessa kaikki sivuluokkien johtajat. Muut rivit on muodostettu valitsemalla vähiten painava sana $u$ vektoriavaruudesta $A^4 = \Zset_2^4$ ja sijoittamalla se rivin vasempaan reunaan. Sitten loput sanat ovat saatu laskemalla sana $u$ yhteen koodin $C$ koodisanojen kanssa.
+
+        Oletetaan, että vastaanotetaan sana 0010.
     \end{esimerkki}
 
     \begin{thebibliography}{9}
