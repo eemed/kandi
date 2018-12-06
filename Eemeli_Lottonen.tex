@@ -199,10 +199,10 @@ pdfstartview=FitH]{hyperref}
     Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita
     $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi.
 
-    Oletetaan viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
+    Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     [KUVA]
     \begin{esimerkki}\label{esim:3bitsanat}
-        Muodostetaan kaikki mahdolliset $k = 3$ bittiset sanat.
+        Muodostetaan kaikki mahdolliset $k = 3$-bittiset sanat.
         \begin{center}
             \begin{tabular}[t]{llll}
                 000 & 001 & 011 & 111 \\
@@ -214,12 +214,12 @@ pdfstartview=FitH]{hyperref}
         \[
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
         \]
-        Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen niin $x_4 = 0$ tai, jos summa on pariton niin $x_4 = 1$.
-        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä missä kohtaa se on tapahtunut.
+        Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen niin $x_4 = 0$ tai, jos summa on pariton, niin $x_4 = 1$.
+        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä, missä kohtaa se on tapahtunut.
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin
-        esimerkissä~\ref{esim:3bitsanat}. Lisätään neljäsbitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään kumpi koodisanoista on väärä ja täten osataan myös korjata virheen.
+        esimerkissä~\ref{esim:3bitsanat}. Lisätään neljäs bitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään, kumpi koodisanoista on väärä, ja täten osataan myös korjata virhe.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
@@ -231,7 +231,7 @@ pdfstartview=FitH]{hyperref}
                 \text{$n$ kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakkoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
-            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi jos $\dim_A C = k$ kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$ niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
+            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$, kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi, jos $\dim_A C = k$, kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$, niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
         \end{enumerate}
     \end{maaritelma}
 
@@ -245,12 +245,12 @@ pdfstartview=FitH]{hyperref}
     % Toimii
     % \end{proof}
 
-    \section{Hamming etäisyys ja -paino}
+    \section{Hamming-etäisyys ja -paino}
     \begin{maaritelma}[{\cite[s.~492]{PA}}]\label{maar:perus}
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
-            \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan Hamming etäisyydeksi ja sitä merkitään $d(u,v)$.
-            \item\label{kht:paino} Hamming painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming painoa merkitään
+            \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan \break Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
+            \item\label{kht:paino} Hamming-painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming-painoa merkitään
                 $\wt(u)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
                 \[
@@ -329,10 +329,10 @@ pdfstartview=FitH]{hyperref}
                 010 & 010101\\
             \end{tabular}
         \end{center}
-        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, niin komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, niin kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
+        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
 
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
@@ -419,8 +419,22 @@ pdfstartview=FitH]{hyperref}
         \end{center}
         Ensimmäisessä rivissä on kaikki koodin $C$ koodisanat ja ensimmäisessä sarakkeessa kaikki sivuluokkien johtajat. Muut rivit on muodostettu valitsemalla vähiten painava sana $u$ vektoriavaruudesta $A^4 = \Zset_2^4$ ja sijoittamalla se rivin vasempaan reunaan. Sitten loput sanat ovat saatu laskemalla sana $u$ yhteen koodin $C$ koodisanojen kanssa.
 
-        Oletetaan, että vastaanotetaan sana 0010.
+        Oletetaan, että vastaanotetaan sana 0010. Nyt sana 0010 esiintyy taulukon kolmannessa rivissä ja toisessa sarakkeessa. Taulukon kolmannen rivin vasemmasta reunasta nähdään sen sivuluokan johtaja 0100, joten vastaanotetun sanan sivuluokka on $0100 + C$. Täten vastaanotettu sana 0010 voidaan dekoodata $0010 - 0100 = 0110$.
     \end{esimerkki}
+
+    \begin{lause}\label{lause:nnstdarr}
+        Sivuluokka dekoodaus on lähin-naapuri dekoodausta.
+    \end{lause}
+
+    \begin{proof}[Todistus \upshape(vrt. {\cite[s.~496]{PA}})]\label{tod:nnstdarr}
+        Olkoot $C$ $(n,k)$-koodi ja vastaanotettu sana $w \in u + C$, missä sana $u$ on sivuluokan johtaja. Nyt sana $w$ voidaan dekoodata $w - u = v \in C$. Haluamme osoittaa, että epäyhtälö $d(w,v) \le d(w, y)$ pätee jokaiselle $y \in C$. Käytetään ensin lauseen~\ref{lause:Hamming} kohtaa~\ref{kht:etaisyyspaino}, josta saadaan
+        \[
+            d(w,v) = \wt(w-v) = \wt(u). %\le \wt(w-y) = d(w,y).
+        \]
+        Koska sivuluokaa voidaan merkitä sen minkätahansa alkion avulla, niin jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
+        \[\wt(u) \le \wt(w-y) = d(w,y).\]
+        
+    \end{proof}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
