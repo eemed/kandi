@@ -235,7 +235,15 @@ pdfstartview=FitH]{hyperref}
         \end{enumerate}
     \end{maaritelma}
 
-    % TODO esimerkki aliavaruuden todisatamisesta
+    \begin{esimerkki}\label{esim:todaliav}
+        Esimerkissä~\ref{esim:3bitsanat} esitimme $(4,3)$-koodin
+        \[
+            C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\} \subseteq A^4.
+        \]
+        $A^4$ on vektoriavaruus, koska $A = \Zset_2$ on kunta. Huomataan, että koodisana $0000 \in C$. 
+
+        Olkoot koodisanat $u \in C$ ja $v \in C$. Nyt koodisanan $u$ kaikkien komponenttien summa on $0 \bmod2$. Täten sama pätee myös koodisanalle $u + v$. Olkoot sitten skalaari $a \in A = \Zset_2$ ja koodisana $u \in C$. Nyt koodisanalle $u$ pätee joko $au = 0$ tai $au = u$.
+    \end{esimerkki}
 
     % \begin{lause}\label{thm: kasautumispisteen ympäristössä}
     %     A on B
@@ -304,7 +312,7 @@ pdfstartview=FitH]{hyperref}
         Riittää siis todistaa, että $z_i \le x_i + y_i$ kaikilla $1 \le i \le n$. Tämä seuraa kuitenkin suoraan siitä että $z_i = x_i + y_i \bmod 2$.
     \end{proof}
 
-    \begin{esimerkki}
+    \begin{esimerkki}\label{esim:minetaisyys}
         Tarkastellaan sitten yhtä etäisyyden käyttömahdollisuutta välityksessä. Oletetaan, että viestin välityksessä tapahtuu yksi virhe. Silloin vastaanotetun koodisanan ja oikean koodisanan etäisyys on 1. Määritellään seuraavaksi koodi $C$, jonka minimietäisyys on $d = 3$.
 
         Esimerkissä~\ref{esim:3bitsanat} listasimme kaikki aakkoston $A^3$ sanat, missä $A = \Zset_2$. Koodataan nämä sanat lisäämällä kolme uutta komponenttia. Määritellään koodi $C \subseteq A^6$ seuraavasti:
@@ -337,7 +345,7 @@ pdfstartview=FitH]{hyperref}
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
         Oletetaan, että lähetettävä sana on 001 ja sen vastaava koodisana $u = 011110 \in C$.
-        Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaan otettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
+        Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaanotettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
     \end{esimerkki}
 
     \begin{maaritelma}\label{maar:nkkoodi}
@@ -366,7 +374,9 @@ pdfstartview=FitH]{hyperref}
 
     Rajoitutaan loppuosassa binäärikoodeihin eli $A = \Zset_2$.
     \begin{esimerkki}
-        TODO
+        Tarkastellaan seuraavaksi esimerkin~\ref{esim:minetaisyys} $(6,3)$-koodia $C$. Esimerkissä totesimme, että koodin $C$ minimietäisyys $d = 3$. Nyt siis jos $t = 1$, koodi $C$ osaa korjata lähetyksessä tapahtuneet virheet. Jos $t = 2$, koodi $C$ tunnistaa virheet, mutta ei osaa korjata niitä.
+
+        Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi tietää kumpi koodisanoista $u$ ja $v$ oli alunperin lähetetty.
     \end{esimerkki}
 
     \begin{lause}\label{lause:Hammingrajoitus}
@@ -433,7 +443,6 @@ pdfstartview=FitH]{hyperref}
         \]
         Koska sivuluokaa voidaan merkitä sen minkätahansa alkion avulla, niin jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
         \[\wt(u) \le \wt(w-y) = d(w,y).\]
-        
     \end{proof}
 
     \begin{thebibliography}{9}
