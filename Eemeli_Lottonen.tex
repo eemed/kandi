@@ -202,7 +202,7 @@ pdfstartview=FitH]{hyperref}
     Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     [KUVA]
     \begin{esimerkki}\label{esim:3bitsanat}
-        Muodostetaan kaikki mahdolliset $k = 3$-bittiset sanat.
+        Muodostetaan kaikki mahdolliset 3-bittiset sanat.
         \begin{center}
             \begin{tabular}[t]{llll}
                 000 & 001 & 011 & 111 \\
@@ -210,7 +210,7 @@ pdfstartview=FitH]{hyperref}
             \end{tabular}
         \end{center}
         Määrittelemme sanoihin neljännen bitin
-        $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4 bittisten sanojen joukko on siis seuraava:
+        $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4 bittisten koodisanojen joukko eli koodi on siis seuraava:
         \[
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
         \]
@@ -219,7 +219,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin
-        esimerkissä~\ref{esim:3bitsanat}. Lisätään neljäs bitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään, kumpi koodisanoista on väärä, ja täten osataan myös korjata virhe.
+        esimerkissä~\ref{esim:3bitsanat}. Lisätään sitten sanoihin neljäs bitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään, kumpi koodisanoista on väärä, ja täten osataan myös korjata virhe.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
@@ -257,7 +257,7 @@ pdfstartview=FitH]{hyperref}
     \begin{maaritelma}[{\cite[s.~492]{PA}}]\label{maar:perus}
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
-            \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan \break Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
+            \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan \break{} Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
             \item\label{kht:paino} Hamming-painolla tarkoitetaan sanan $u$, niiden komponenttien lukumäärää, jotka eroavat nollasta. Hamming-painoa merkitään
                 $\wt(u)$.
             \item Olkoon $r\ge0$ reaaliluku. Nyt joukkoa
@@ -352,7 +352,8 @@ pdfstartview=FitH]{hyperref}
         Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan parillisuus yhtälöiksi.
     \end{maaritelma}
 
-    \chapter{Virheenkorjaaminen ja sivuluokkadekoodaus}
+    \chapter{Virheenkorjaaminen}
+    \section{Minimietäisyys}
 
     \begin{lause}\label{lause:nncorrection}
         Olkoon koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Jos käytämme lähin-naapuri dekoodausta, niin kaikille $t \in \Nset$ pätee seuraavat ehdot:
@@ -379,6 +380,7 @@ pdfstartview=FitH]{hyperref}
         Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi tietää kumpi koodisanoista $u$ ja $v$ oli alunperin lähetetty.
     \end{esimerkki}
 
+    \section{Sivuluokkadekoodaus}
     \begin{lause}\label{lause:Hammingrajoitus}
         Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajoitukseksi kutsutaan seuraavaa epäyhtälöä:
         \[
@@ -441,7 +443,7 @@ pdfstartview=FitH]{hyperref}
         \[
             d(w,v) = \wt(w-v) = \wt(u). %\le \wt(w-y) = d(w,y).
         \]
-        Koska sivuluokaa voidaan merkitä sen minkätahansa alkion avulla, niin jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
+        Koska sivuluokaa voidaan merkitä sen minkätahansa alkion avulla, jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
         \[\wt(u) \le \wt(w-y) = d(w,y).\]
     \end{proof}
 
