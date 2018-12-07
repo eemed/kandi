@@ -349,7 +349,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \begin{maaritelma}\label{maar:nkkoodi}
-        Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan parillisuus yhtälöiksi.
+        Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan pariteetintarkastusyhtälöiksi.
     \end{maaritelma}
 
     \chapter{Virheenkorjaaminen}
@@ -364,9 +364,9 @@ pdfstartview=FitH]{hyperref}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~494]{PA}})]\label{tod:nncorrection}
-        Aloitetaan lauseen~\ref{lause:nncorrection} kohdasta~\ref{kht:vtunnistus}. Olkoot koodi $C \in A^n$ ja sen minimietäisyys $d$. Valitaan sitten koodisana $u \in C$. Nyt pallo $S_t(u)$ sisältää kaikki mahdolliset vastaanotetut sanat, jos lähetetty koodisana oli $u$ ja välityksessä tapahtui enintään $t$ virhettä. Jos koodin $C$ minimietäisyys $d < t$, niin pallo $S_t(u)$ sisältää vain koodisanan $u$. Täten jos virheitä tapahtuu enintään $t$ kappaletta, niin vastaanotettu sana $w$ ei ole koodisana. Näin voimme tunnistaa, jos virheitä on tapahtunut enintään $t$ kappaletta.
+        Aloitetaan lauseen~\ref{lause:nncorrection} kohdasta~\ref{kht:vtunnistus}. Olkoot koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Valitaan sitten koodisana $u \in C$. Nyt pallo $S_t(u)$ sisältää kaikki mahdolliset vastaanotetut sanat, jos lähetetty koodisana oli $u$ ja välityksessä tapahtui enintään $t$ virhettä. Jos koodin $C$ minimietäisyys $d < t$, niin pallo $S_t(u)$ sisältää vain koodisanan $u$. Täten jos virheitä tapahtuu enintään $t$ kappaletta, niin vastaanotettu sana $w$ ei ole koodisana. Näin voimme tunnistaa, jos virheitä on tapahtunut enintään $t$ kappaletta.
 
-        Kohdassa~\ref{kht:vkorjaus} aloitetaan samalla tavalla. Olkoot koodi $C \in A^n$ ja sen minimietäisyys $d$. Valitaan sitten kaksi koodisanaa $u, v \in C$ siten, että $u \neq v$. Jos minimietäisyydelle pätee $2t < d$, niin vastaanotettu sana $w$ ei voi sisältyä molempiin palloihin $S_t(u)$ ja $S_t(v)$. Tämä voidaan osoittaa olettamalla ensin, että sana $w$ kuuluu molempiin palloihin. Nyt kolmioepäyhtälöstä saadaan
+        Kohdassa~\ref{kht:vkorjaus} aloitetaan samalla tavalla. Olkoot koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Valitaan sitten kaksi koodisanaa $u, v \in C$ siten, että $u \neq v$. Jos minimietäisyydelle pätee $2t < d$, niin vastaanotettu sana $w$ ei voi sisältyä molempiin palloihin $S_t(u)$ ja $S_t(v)$. Tämä voidaan osoittaa olettamalla ensin, että sana $w$ kuuluu molempiin palloihin. Nyt kolmioepäyhtälöstä saadaan
         \[
             d(u,v) \le d(u,w) + d(w, v) \le t + t < d,
         \]
@@ -381,8 +381,8 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \section{Sivuluokkadekoodaus}
-    \begin{lause}\label{lause:Hammingrajoitus}
-        Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajoitukseksi kutsutaan seuraavaa epäyhtälöä:
+    \begin{lause}\label{lause:Hammingraja}
+        Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajaksi kutsutaan seuraavaa epäyhtälöä:
         \[
             2^k = \abs{C} \le \frac{2^n}{\binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\cdots+\binom{n}{t}}
         \]
@@ -390,15 +390,15 @@ pdfstartview=FitH]{hyperref}
         \[
             \binom{n}{b} = \frac{n!}{b!(n-b)!}
         \]
-        on binomikerroin ja $\abs{C}$ on koodin $C$ mahtavuus.
+        on binomikerroin ja $\abs{C}$ on koodin $C$ koodisanojen lukumäärä.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.495]{PA}})]\label{tod:Hammingrajoitus}
-        Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ mahtavuus $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ mahtavuus on siis
+        Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ koodisanojen lukumäärä on $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ sanjen lukumäärä on siis
         \[
             \abs{S_t(u)} = \binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}.
         \]
-        Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$. Nyt siis alkioita kaikissa palloissa on yhteensä
+        Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$ toisinsanoen palloissa ei ole yhteisiä alkoita eli ne ovat erilliset. Nyt siis alkioita kaikissa palloissa on yhteensä
         \[
             \sum_{u \in C}\abs{S_t(u)} = \abs{S_t(u)}\abs{C}.
         \]
@@ -411,7 +411,7 @@ pdfstartview=FitH]{hyperref}
         \end{align*}
     \end{proof}
 
-    Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki abelinryhmän aksioomat. Vektoriavaruuden $A^n$ mahtavuus on $2^n$. Nyt koodi $C$ on vektoriavaruuden $A^n$ aliryhmä yhteenlaskun suhteen ja sen mahtavuus on $2^k$. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
+    Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki Abelin ryhmän aksioomat. Abelin ryhmän $A^n$ alkioiden lukumäärä on $2^n$. Nyt koodi $C$ on Abelin ryhmän $A^n$ aliryhmä yhteenlaskun suhteen ja se sisältää $2^k$ koodisanaa. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
 
     Seuraavaksi esittelemme sivuluokkadekoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
     \[
