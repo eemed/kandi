@@ -449,15 +449,66 @@ pdfstartview=FitH]{hyperref}
 
     \chapter{Generoija matriisit}
     Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $2^k$ koodisanasta, joiden pituus on $n$. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Tiivistämme seuraavaksi kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
-    \begin{esimerkki}
-        Valitaan seuraava $3 \times 5$ kokoinen matriisi:
+
+    \begin{esimerkki}\label{esim:genmatrix}
+        Valitaan seuraava $3 \times 6$ kokoinen matriisi:
         \[
             G=
             \begin{bmatrix}
-                0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0 \\
-                0 & 0 & 0 & 0 & 0
+                1 & 0 & 0 & 1 & 1 & 0\\
+                0 & 1 & 0 & 1 & 0 & 1\\
+                0 & 0 & 1 & 0 & 1 & 1
             \end{bmatrix}
+        \]
+
+        Nyt jokainen sana $x_1x_2x_3$ voidaan kirjoittaa $1 \times 3$ kokoisena matriisina. Kun alkuperäinen koodattava sana kerrotaan matriisilla $G$, saadaan koodin $C$ koodisana. Saamme koodisanaksi:
+        \[
+           \begin{bmatrix}
+               x_1 & x_2 & x_3
+            \end{bmatrix}G =
+            \begin{bmatrix}
+                x_1 & x_2 & x_3 & x_4 & x_5 & x_6
+            \end{bmatrix},
+        \]
+        missä $x_4 = x_1 + x_2$, $x_5 = x_1 + x_3 $ ja $x_6 = x_2 + x_3$. Koodi $C$ on siis määritelty samoin kuin esimerkissä~\ref{esim:minetaisyys}. Esimerkiksi, jos halutaan lähettää sana 011, saamme koodisanaksi
+        \[
+           \begin{bmatrix}
+               0 & 1 & 1
+            \end{bmatrix}
+            G =
+            \begin{bmatrix}
+                0 & 1 & 1 & 1 & 1 & 0
+            \end{bmatrix},
+        \]
+        joka näkyy myös esimerkin~\ref{esim:minetaisyys} taulukosta. Täten koodi
+        \[
+            C = \{\,wG \mid w \in A^k\,\}
+        \]
+        ja matriisi $G$ sisältää kaiken tarvittavan tiedon sanojen koodaamiseen.
+    \end{esimerkki}
+
+    \begin{maaritelma}
+        Olkoon $G$ $k \times n$ kokoinen generoija matriisi. Nyt matriisi 
+        \[
+            G = 
+            \begin{bmatrix}
+                I_k & B 
+            \end{bmatrix},
+        \]
+        missä $I_k$ on $k \times k$ kokoinen identiteetti matriisi ja $B$ on $k \times (n-k)$ kokoinen binääri matriisi. 
+        
+    \end{maaritelma}
+
+    \begin{esimerkki}
+        % TODO
+        Nyt esimerkin~\ref{esim:genmatrix} matriisin $G$ binääri matriisi oli
+        \[
+            B =
+            \begin{bmatrix}
+                1 & 1 & 0 \\
+                1 & 0 & 1 \\
+                0 & 1 & 1
+            \end{bmatrix}.
         \]
     \end{esimerkki}
 
