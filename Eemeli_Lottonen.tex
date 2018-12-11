@@ -223,7 +223,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
-    \begin{maaritelma}[{\cite[s.~491]{PA}}]
+    \begin{maaritelma}[{\cite[s.~491]{PA}}]\label{maar:tarvittavat}
         Olkoon $A$ jokin äärellinen joukko, kutsumme joukkoa $A$ \emph{aakkostoksi}.
 
         \begin{enumerate}
@@ -231,7 +231,7 @@ pdfstartview=FitH]{hyperref}
                 \text{$n$ kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ pituus on $n$ ja se muodostuu aakkoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
-            \item Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$, kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi, jos $\dim_A C = k$, kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$, niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
+            \item\label{kht:linkoodi} Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$, kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi, jos $\dim_A C = k$, kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$, niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
         \end{enumerate}
     \end{maaritelma}
 
@@ -487,7 +487,7 @@ pdfstartview=FitH]{hyperref}
         ja matriisi $G$ sisältää kaiken tarvittavan tiedon sanojen koodaamiseen.
     \end{esimerkki}
 
-    \begin{maaritelma}[{\cite[s.~497]{PA}}]
+    \begin{maaritelma}[{\cite[s.~497]{PA}}]\label{maar:generoija}
         Olkoon $G$ $k \times n$ kokoinen generoija matriisi. Nyt matriisi 
         \[
             G = 
@@ -523,6 +523,8 @@ pdfstartview=FitH]{hyperref}
         \]
     \end{esimerkki}
 
+    \section{Systemaattiset koodit}
+
     \begin{maaritelma}[{\cite[s.~498]{PA}}]\label{maar:systemaattinen}
         Kutsumme $(n, k)$-koodia \emph{systemaattiseksi koodiksi}, jos sana $u \in A^k$ muodostaa täsmälleen yhden koodisanan $v \in C$ ensimmäiset $k$ komponenttia. Toisin sanoen koodissa $C$ on olemassa vain yksi koodisana  siten, että $u_i = v_i$, kaikilla $i \in [1,k]$.
     \end{maaritelma}
@@ -536,7 +538,98 @@ pdfstartview=FitH]{hyperref}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~498]{PA}})]\label{tod:systemaattinen}
-        Aloitetaan lauseen~\ref{lause:systemaattinen} kohdasta~\ref{kht:sysmatr}. Olkoot $G$ $k \times n$ kokoinen generoija matriisi ja koodi $C = \{\, vG \mid v \in A^k\,\}$.
+        % TODO tarviiko todistaa että ne on ryhmiä
+        Aloitetaan lauseen~\ref{lause:systemaattinen} kohdasta~\ref{kht:sysmatr}. Olkoot $G$ $k \times n$ kokoinen generoija matriisi ja koodi $C = \{\, vG \mid v \in A^k\,\}$. Koska kaikki vektoriavaruudet $A^r$ ovat Abelin ryhmiä yhteenlaskun suhteen, kun $r \ge 0$, voidaan määritellä funktio $\phi: A^k \rightarrow A^n$ siten, että $\phi(v) = Gv \in A^n$. Nyt tämä on ryhmähomomorfismi, sillä jokaiselle $u, v \in A^k$ pätee
+        \[
+            \phi(v + u) = (v + u)G = vG + uG = \phi(v) + \phi(u).
+        \]
+        Nyt siis koodi $C$ on funktion $\phi$ kuvajoukko $Im(\phi)$. Määritelmän~\ref{maar:generoija} perusteella $G = [I_k\, B]$, joten
+        \[
+            \phi(v) =
+            \begin{bmatrix}
+                v & vB
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                u & uB
+            \end{bmatrix}
+            = \phi(u),
+        \]
+        jos $u = v$. Täten sana $u \in A^k$ kuvautuu vain yhtenä koodisanana koodissa $C$ ja siis $\phi$ on injektiivinen. Nyt siis vektoriavaruus $A^k \cong C$ ja koodi $C$ on vektoriavaruuden $A^n$ aliryhmä. Täten määritelmän~\ref{maar:tarvittavat} kohdan~\ref{kht:linkoodi} perusteella $C$ on $(n, k)$-koodi. Koodi $C$ on myös systemaattinen, sillä funktio $\phi$ on määritelty sopivasti.
+
+        Tarkastellaan sitten kohtaa~\ref{kht:sysgenmatr}. Olkoon koodi $C$ systemaattinen $(n, k)$-koodi. Muodostamme sitten generoija matriisin $G$. Olkoon $\{e_i\}$ neutraalikanta vektoriavaruudelle $A^k$. Koska koodi $C$ on systemaattinen, jokaiselle $1 \le i \le k$ on olemassa eri koodisana $c_i \in C$. Nyt siis koodisana $c_i = [e_i \,\, d_i]$, missä koodisanan $c_i$ ensimmäiset $k$ komponenttia ovat vektori $e_i$ ja $d_i$ on jokin vektori vektoriavaruudesta $A^{n-k}$. Olkoon nyt $B$ $k \times (n-k)$ kokoinen matriisi, missä on sanat $d_i$ riveinä. Olkoon myös generoija matriisi $G = [I_k\,\,B]$. Haluamme nyt osoittaa, että koodi $C = \{\,vG \mid v \in A^k\,\}$. Koska $e_i B$ on matriisin $B$ rivi kohdassa $i$, kun $1 \le i \le k$, saamme kaikille $1 \le i \le k$
+        \[
+            e_i G = e_i
+            \begin{bmatrix}
+                I_k & B
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                e_i & e_i B
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                e_i & d_i
+            \end{bmatrix}
+            =
+            c_i \in C.
+        \]
+        Nyt koska $e_i$ oli neutraalikanta vektoriavaruudelle $A^k$, saamme
+        \[
+            \{\,vG \mid v \in A^k\,\} \subseteq C.
+        \]
+        Olkoon $c \in C$, missä $c = [u\,\,w]$, $u \in A^k$ ja $w \in A^{n-k}$. Nyt saamme
+        \[
+            uG = u[I_k\,\,B] = [u\,\,uB] = [u\,\,w'] \in C.
+        \]
+        Mutta koska koodi $C$ on systemaattinen samme määritelmän~\ref{maar:systemaattinen} perusteella
+        \[
+            [u\,\,w'] = [u\,\,w] = c = uG
+        \]
+        Täten saamme
+        \[
+            C \subseteq \{\,vG \mid v \in A^k\,\}.
+        \]
+        Olemme osoittaneet nyt, että koodi $C = \{\,vG \mid v \in A^k\,\}$.
+    \end{proof} 
+
+    \chapter{Syndroomat}
+    Generoija matriisit ovat hyviä koodaamaan sanoja. Tarvitsemme vielä tavan dekoodata vastaanotetut sanat helposti. Tarkastellaan seuraavaksi syndrooma metodia tähän tarkoitukseen.
+    \begin{maaritelma}[{\cite[s.~499]{PA}}]\label{maar:parcheckmatrix}
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G = [I_k\,\,B]$. Nyt $n \times (n-k)$ kokoista matriisia
+        \[
+            H =
+            \begin{bmatrix}
+                B \\
+                I_{n-k}
+            \end{bmatrix}
+        \]
+        kutsutaan \emph{pariteettitarkastusmatriisiksi}. Olkoon sana $w \in A^n$. Nyt sanan $w$ \emph{syndrooma} on $wH \in A^{n-k}$.
+    \end{maaritelma}
+
+    \begin{esimerkki}\label{esim:parcheckmatrix}
+        Esimerkissä~\ref{esim:stdmatrix} pariteettitarkastusmatriisi oli
+        \[
+            H = 
+            \begin{bmatrix}
+                1 & 1 \\
+                1 & 0 \\
+                1 & 0 \\
+                0 & 1
+            \end{bmatrix}.
+        \]
+    \end{esimerkki}
+
+    \begin{lause}\label{lause:sanojensyndroomat}
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G$ ja pariteettitarkastusmatriisi $H$. Nyt jokaiselle $v \in A^n$ pätee $vH = 0 \in A^{n-k}$, jos $v \in C$.
+    \end{lause}
+
+    \begin{proof}[Todistus \upshape(vrt. {\cite[s.~499]{PA}})]\label{tod:sanojensyndroomat}
+        Kuten lauseen~\ref{lause:systemaattinen} todistuksessa, käytetään tässäkin hyväksi tietoa, että kunnasta muodostettu vektoriavaruus on Abelin ryhmä yhteenlaskun suhteen. Määritellään funktio $\phi:A^n \rightarrow A^{n-k}$ siten, että $\phi(v) = vH$ jokaiselle $v \in A^n$. Nyt jokaiselle $u, v \in A^n$ pätee
+        \[
+            \phi(u + v) = (v + u)H = uH + vH = \phi(u) + \phi(v)
+        \]
+        Täten funktio $\phi$ on ryhmähomomorfismi. Funktio $\phi$ on myös surjektio.
     \end{proof}
 
     \begin{thebibliography}{9}
