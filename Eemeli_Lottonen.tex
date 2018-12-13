@@ -196,24 +196,19 @@ pdfstartview=FitH]{hyperref}
     %           https://matematiikkalehtisolmu.fi/sanakirja
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Johdanto}
+    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Jotta viesti vastaanotettaisiin tarkoitetussa merkityksessään on kehitetty erilaisia metodeja virheiden havaitsemiseen ja korjaamiseen. Tässä tutkielmassa käsittelemme yksinkertaisimpia tapoja koodata ja dekoodata viestejä. 
+    
+    Aloitamme hyvin yksinkertaisista esimerkeistä ja siirrymme sitten lähin naapuri dekoodaukseen. Lähin naapuri dekoodauksessa keskitymme ensin minimietäisyyden käyttöön ja sen jälkeen sivuluokkien käyttöön dekoodauksessa. Syvennymme sitten sivuluokkien käyttöön generoijamatriisien ja syndroomien kanssa. 
 
-
-
-    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Jotta viesti vastaanotettaisiin tarkoitetussa merkityksessään on kehitetty erilaisia metodeja virheiden havaitsemiseen ja korjaamiseen. Tässä tutkielmassa käsittelemme \dots
-
-    [ Mitä tutkielmassa tehdään ]
-
-
-    [ Edellytykset ]
+    Oletetaan, että lukija tuntee joukkojen rakenteet kuten ryhmät ja kunnat. Loppuosassa tarvitaan myös tietoa homomorfismista, isomorfismista ja niiden ominaisuuksista.
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä. Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita
-    $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi.
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.[VIITE] Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita
+    $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi. Merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun on lisätty $\bmod 2$.
 
     Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
-    [KUVA]
     \begin{esimerkki}\label{esim:3bitsanat}
         Muodostetaan kaikki mahdolliset 3-bittiset sanat.
         \begin{center}
@@ -236,7 +231,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
-    \begin{maaritelma}[{\cite[s.~491]{PA}}]\label{maar:tarvittavat}
+    \begin{maaritelma}[vrt. {\cite[s.~491]{PA}}]\label{maar:tarvittavat}
         Olkoon $A$ jokin äärellinen joukko, kutsumme joukkoa $A$ \emph{aakkostoksi}.
 
         \begin{enumerate}
@@ -267,7 +262,7 @@ pdfstartview=FitH]{hyperref}
     % \end{proof}
 
     \section{Hamming-etäisyys ja -paino}
-    \begin{maaritelma}[{\cite[s.~492]{PA}}]\label{maar:perus}
+    \begin{maaritelma}[vrt. {\cite[s.~492]{PA}}]\label{maar:perus}
         Olkoot $u$ ja $v$ sanoja vektoriavaruudesta $A^n$.
         \begin{enumerate}
             \item\label{kht:etaisyys} Sanojen $u$ ja $v$ komponenttien eroavaisuuksien lukumäärää kutsutaan \break{} Hamming-etäisyydeksi ja sitä merkitään $d(u,v)$.
@@ -292,7 +287,7 @@ pdfstartview=FitH]{hyperref}
             \item\label{kht:etaisyyspaino} $d(u, v) = \wt(u - v)$
             \item\label{kht:vaihdannaisuus}$d(u, v) = d(v, u)$
             \item\label{kht:nollaetaisyys} $d(u, v) = 0$, jos $u = v$
-            \item\label{kht:kolmioey} $d(u, w) \le d(u, v) + d(v, w)$ \quad (kolmioepäyhtälö)
+            \item\label{kht:kolmioey} $d(u, w) \le d(u, v) + d(v, w)$. \quad (kolmioepäyhtälö)
         \end{enumerate}
     \end{lause}
 
@@ -350,7 +345,7 @@ pdfstartview=FitH]{hyperref}
                 010 & 010101\\
             \end{tabular}
         \end{center}
-        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat, joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti, jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
         Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
@@ -361,7 +356,7 @@ pdfstartview=FitH]{hyperref}
         Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaanotettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
     \end{esimerkki}
 
-    \begin{maaritelma}\label{maar:nkkoodi}
+    \begin{maaritelma}[vrt. {\cite[s.~491]{PA}}]\label{maar:nkkoodi}
         Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan pariteetintarkastusyhtälöiksi.
     \end{maaritelma}
 
@@ -369,7 +364,7 @@ pdfstartview=FitH]{hyperref}
     \section{Minimietäisyys}
 
     \begin{lause}\label{lause:nncorrection}
-        Olkoon koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Jos käytämme lähin-naapuri dekoodausta, niin kaikille $t \in \Nset$ pätee seuraavat ehdot:
+        Olkoon koodi $C \subseteq A^n$ ja sen minimietäisyys $d$. Jos käytämme lähin naapuri dekoodausta, niin kaikille $t \in \Nset$ pätee seuraavat ehdot:
         \begin{enumerate}
             \item\label{kht:vtunnistus} Koodi $C$ voi tunnistaa ainakin $t$ kappaletta virheitä, jos $t + 1 \le d$.
             \item\label{kht:vkorjaus} Koodi $C$ voi korjata ainakin $t$ kappaletta virheitä, jos $2t + 1 \le d$.
@@ -395,7 +390,7 @@ pdfstartview=FitH]{hyperref}
 
     \section{Sivuluokkadekoodaus}
     \begin{lause}\label{lause:Hammingraja}
-        Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajaksi kutsutaan seuraavaa epäyhtälöä:
+        Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin naapuri dekoodausta. Hamming-rajaksi kutsutaan seuraavaa epäyhtälöä:
         \[
             2^k = \abs{C} \le \frac{2^n}{\binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\cdots+\binom{n}{t}},
         \]
@@ -450,7 +445,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \begin{lause}\label{lause:nnstdarr}
-        Sivuluokka dekoodaus on lähin-naapuri dekoodausta.
+        Sivuluokka dekoodaus on lähin naapuri dekoodausta.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~496]{PA}})]\label{tod:nnstdarr}
@@ -462,21 +457,20 @@ pdfstartview=FitH]{hyperref}
         \[\wt(u) \le \wt(w-y) = d(w,y).\]
     \end{proof}
 
-    \chapter{Generoija matriisit}
-    Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $n$ pituisista koodisanoista. Näitä koodisanoja on yhteensä $k$ kapaletta. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Voimme kuitenkin tiivistää kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
+    \chapter{generoijamatriisit}
+    Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $n$ pituisista koodisanoista. Näitä koodisanoja on yhteensä $2^k$ kapaletta. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Voimme kuitenkin tiivistää kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
 
     \begin{esimerkki}\label{esim:genmatrix}
         Valitaan seuraava $3 \times 6$ kokoinen matriisi:
-
         \[
             G=
             \begin{bbmatrix}
                 1 & 0 & 0 & 1 & 1 & 0\\
                 0 & 1 & 0 & 1 & 0 & 1\\
                 0 & 0 & 1 & 0 & 1 & 1
-            \end{bbmatrix}
+            \end{bbmatrix}.
         \]
-        Nyt jokainen sana $x_1x_2x_3$ voidaan kirjoittaa $1 \times 3$ kokoisena matriisina. Kun alkuperäinen koodattava sana kerrotaan matriisilla $G$, saadaan koodin $C$ koodisana. Saamme koodisanaksi:
+        Nyt jokainen sana $x_1x_2x_3$ voidaan kirjoittaa $1 \times 3$ kokoisena matriisina. Kun alkuperäinen koodattava sana kerrotaan matriisilla $G$, saadaan koodin $C$ koodisana. Saamme koodisanaksi
         \[
            \begin{bmatrix}
                x_1 & x_2 & x_3
@@ -502,20 +496,19 @@ pdfstartview=FitH]{hyperref}
         ja matriisi $G$ sisältää kaiken tarvittavan tiedon sanojen koodaamiseen.
     \end{esimerkki}
 
-    \begin{maaritelma}[{\cite[s.~497]{PA}}]\label{maar:generoija}
-        Olkoon $G$ $k \times n$ kokoinen generoija matriisi. Nyt matriisi 
+    \begin{maaritelma}[vrt. {\cite[s.~497]{PA}}]\label{maar:generoija}
+        Olkoon $G$ $k \times n$ kokoinen generoijamatriisi. Nyt generoijamatriisi voidaan paloitella seuraavasti:
         \[
             G = 
             \begin{bmatrix}
                 I_k & B 
             \end{bmatrix},
         \]
-        missä $I_k$ on $k \times k$ kokoinen identiteetti matriisi ja $B$ on $k \times (n-k)$ kokoinen binääri matriisi. 
-        
+        missä $I_k$ on $k \times k$ kokoinen identiteetti matriisi ja $B$ on $k \times (n-k)$ kokoinen binäärimatriisi. 
     \end{maaritelma}
 
     \begin{esimerkki}
-        Esimerkiksi esimerkin~\ref{esim:stdmatrix} generoija matriisi on
+        Esimerkiksi esimerkin~\ref{esim:stdmatrix} generoijamatriisi on
         \[
             C =
             \begin{bbmatrix}
@@ -539,22 +532,26 @@ pdfstartview=FitH]{hyperref}
 
     \section{Systemaattiset koodit}
 
-    \begin{maaritelma}[{\cite[s.~498]{PA}}]\label{maar:systemaattinen}
+    \begin{maaritelma}[vrt. {\cite[s.~498]{PA}}]\label{maar:systemaattinen}
         Kutsumme $(n, k)$-koodia \emph{systemaattiseksi koodiksi}, jos sana $u \in A^k$ muodostaa täsmälleen yhden koodisanan $v \in C$ ensimmäiset $k$ komponenttia. Toisin sanoen koodissa $C$ on olemassa vain yksi koodisana  siten, että $u_i = v_i$, kaikilla $i \in [1,k]$.
     \end{maaritelma}
 
     \begin{apulause}\label{apu:isomorfia}
-        Olkoot $G$ ja $G'$ ryhmiä ja funktio $\phi: G \rightarrow G'$ homomorfismi. Olkoot myös ydin $K = \ker(\phi) = \{\,g \in G \mid \phi(g) = 0_{G'}\,\}$, missä $0_{G'}$ on ryhmän $G'$ neutraalialkio. Nyt pätee isomorfia
+        Olkoot $G$ ja $G'$ ryhmiä ja funktio $\phi: G \rightarrow G'$ homomorfismi. Olkoon myös ydin $K = \ker(\phi) = \{\,g \in G \mid \phi(g) = 0_{G'}\,\}$, missä $0_{G'}$ on ryhmän $G'$ neutraalialkio. Nyt pätee isomorfia
         \[
             G/K \cong \phi(G).
         \]
     \end{apulause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~97]{PA}})]\label{tod:isomorfia}
-        Olkoon funktio $\chi: G/K \rightarrow \phi(G)$. Nyt joukon $G/K$ mikä tahansa alkio on sivuluokka $gK$ jollain $g \in G$. Myös jokainen alkio $y \in \phi(G)$ on muotoa $\phi(g)$ jollain $g \in G$. Määrittelemme siis funktion $\chi(gK) = \phi(g)$. Tarkastellaan ensin funktion $\chi$ on yksikäsitteisyyttä. Toisin sanoen, jos siitä että lähtöalkiot ovat samat $g_1K = g_2K$ seuraa $\phi(g_1) = \phi(g_2)$ on funktio $\chi$ yksikäsitteinen.
-        Oletetaan ensin, että $g_1K = g_2K$. Nyt siis $g_1g_2^{-1} \in K$, jolloin saamme
+        Olkoon funktio $\chi: G/K \rightarrow \phi(G)$. Nyt joukon $G/K$ mikä tahansa alkio on sivuluokka $gK$, jollain $g \in G$. Jokainen alkio $y \in \phi(G)$ on muotoa $\phi(g)$, jollain $g \in G$. Määrittelemme nyt funktion $\chi(gK) = \phi(g)$. Tarkastellaan ensin funktion $\chi$ on yksikäsitteisyyttä. Toisin sanoen, jos valitaan kaksi samaa alkiota $g_1K = g_2K$ ja siitä seuraa, että $\phi(g_1) = \phi(g_2)$ on funktio $\chi$ yksikäsitteinen.
+        Oletetaan ensin, että $g_1K = g_2K$. Nyt, kun alkiot ovat samat niin $g_1g_2^{-1} \in K$, jolloin saamme
+        \[
+            \phi(g_1g_2^{-1}) = 0_{G'}.
+        \]
+        Koska funktio $\phi$ on ryhmähomomorfismi voimme kirjoittaa ylemmän yhtälön:
         \begin{align*}
-            \phi(g_1g_2^{-1}) &= 0_{G'} \\
+            \phi(g_1){\phi(g_2)}^{-1} &= 0_{G'} \\
             \phi(g_1) &= \phi(g_2).
         \end{align*}
 
@@ -562,15 +559,15 @@ pdfstartview=FitH]{hyperref}
         \[
             \chi(g_1Kg_2K) = \chi(g_1g_2K) = \phi(g_1g_2) = \phi(g_1)\phi(g_2) = \chi(g_1K)\chi(g_2K),
         \]
-        joten $\chi$ on ryhmähomomorfismi.
+        joten funktio $\chi$ on ryhmähomomorfismi.
 
-        Olkoon $g_1K$ ja $g_2K$ kaksi alkiota joukosta $G/K$ ja $\chi(g_1K) = \chi(g_2K)$.
+        Olkoot $g_1K$ ja $g_2K$ kaksi alkiota joukosta $G/K$, joille pätee $\chi(g_1K) = \chi(g_2K)$.
         Nyt $\phi(g_1) = \phi(g_2)$, joten $\phi(g_1)\phi^{-1}(g_2) = 0_{G'}$. Saamme siis $\phi(g_1g_2^{-1}) = 0_{G'}$ eli $g_1g_2^{-1} \in K$, joten $g_1K = g_2K$. Olemme nyt osoittaneet, että funktio $\chi$ on injektio.
 
         Olkoon $y$ jokin joukon $\phi(G)$ alkio. Nyt alkio $y = \phi(x)$, jollakin alkiolla $x \in G$. Funktion $\chi$ määritelmän perusteella saamme 
         \begin{align*}
             \chi(xK) &= \phi(x) \\
-            y &= \chi(xK),
+            \chi(xK) &= y,
         \end{align*}
         joten funtio $\chi$ on surjektio.
 
@@ -585,13 +582,13 @@ pdfstartview=FitH]{hyperref}
         \mbox{}
         \begin{enumerate}
             \item\label{kht:sysmatr} Olkoon $G$ $k \times n$ kokoinen matriisi. Nyt koodi $C = \{\, vG \mid v \in A^k\,\} \subseteq A^n$ on systemaattinen $(n, k)$-koodi.
-            \item\label{kht:sysgenmatr} Olkoon $C \subseteq A^n$ systemaattinen $(n, k)$-koodi. Nyt on olemassa $k \times n$ kokoinen generoija matriisi siten, että $C = \{\, vG \mid v \in A^k\,\}$.
+            \item\label{kht:sysgenmatr} Olkoon $C \subseteq A^n$ systemaattinen $(n, k)$-koodi. Nyt on olemassa $k \times n$ kokoinen generoijamatriisi siten, että $C = \{\, vG \mid v \in A^k\,\}$.
         \end{enumerate}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~498]{PA}})]\label{tod:systemaattinen}
         % TODO tarviiko todistaa että ne on ryhmiä? EI KAI. On tässä vitusti vaikeempaaki paskaa
-        Aloitetaan lauseen~\ref{lause:systemaattinen} kohdasta~\ref{kht:sysmatr}. Olkoot $G$ $k \times n$ kokoinen generoija matriisi ja koodi $C = \{\, vG \mid v \in A^k\,\}$. Koska kaikki vektoriavaruudet $A^r$ ovat Abelin ryhmiä yhteenlaskun suhteen, kun $r \ge 0$, voidaan määritellä funktio $\phi: A^k \rightarrow A^n$ siten, että $\phi(v) = Gv \in A^n$. Nyt tämä on ryhmähomomorfismi, sillä jokaiselle $u, v \in A^k$ pätee
+        Aloitetaan lauseen~\ref{lause:systemaattinen} kohdasta~\ref{kht:sysmatr}. Olkoot $G$ $k \times n$ kokoinen generoijamatriisi ja koodi $C = \{\, vG \mid v \in A^k\,\}$. Koska kaikki vektoriavaruudet $A^r$ ovat Abelin ryhmiä yhteenlaskun suhteen, kun $r \ge 0$, voidaan määritellä funktio $\phi: A^k \rightarrow A^n$ siten, että $\phi(v) = Gv \in A^n$. Nyt tämä on ryhmähomomorfismi, sillä jokaiselle $u, v \in A^k$ pätee
         \[
             \phi(v + u) = (v + u)G = vG + uG = \phi(v) + \phi(u).
         \]
@@ -614,12 +611,12 @@ pdfstartview=FitH]{hyperref}
         \]
         jos $u = v$. Täten sana $u \in A^k$ kuvautuu vain yhtenä koodisanana koodissa $C$ ja siis funktio $\phi$ on injektio. Apulauseen~\ref{apu:isomorfia} perusteella vektoriavaruus $A^k \cong C$ ja koodi $C$ on vektoriavaruuden $A^n$ aliryhmä. Täten määritelmän~\ref{maar:tarvittavat} kohdan~\ref{kht:linkoodi} perusteella $C$ on $(n, k)$-koodi. Koodi $C$ on myös systemaattinen, sillä funktio $\phi$ on yksikäsitteinen.
 
-        Tarkastellaan sitten kohtaa~\ref{kht:sysgenmatr}. Olkoon koodi $C$ systemaattinen $(n, k)$-koodi. Muodostamme sitten generoija matriisin $G$. Olkoon $\{e_i\}$ neutraalikanta vektoriavaruudelle $A^k$. Koska koodi $C$ on systemaattinen, jokaiselle $1 \le i \le k$ on olemassa eri koodisana $c_i \in C$. Nyt siis koodisana 
+        Tarkastellaan sitten kohtaa~\ref{kht:sysgenmatr}. Olkoon koodi $C$ systemaattinen $(n, k)$-koodi. Muodostamme sitten generoijamatriisin $G$. Olkoon $\{e_i\}$ neutraalikanta vektoriavaruudelle $A^k$. Koska koodi $C$ on systemaattinen, jokaiselle $1 \le i \le k$ on olemassa eri koodisana $c_i \in C$. Nyt siis koodisana 
         $c_i = 
         \begin{bmatrix}
             e_i & d_i
         \end{bmatrix}
-        $, missä koodisanan $c_i$ ensimmäiset $k$ komponenttia ovat vektori $e_i$ ja $d_i$ on jokin vektori vektoriavaruudesta $A^{n-k}$. Olkoon nyt $B$ $k \times (n-k)$ kokoinen matriisi, missä on sanat $d_i$ riveinä. Olkoon myös generoija matriisi 
+        $, missä koodisanan $c_i$ ensimmäiset $k$ komponenttia ovat vektori $e_i$ ja $d_i$ on jokin vektori vektoriavaruudesta $A^{n-k}$. Olkoon nyt $B$ $k \times (n-k)$ kokoinen matriisi, missä on sanat $d_i$ riveinä. Olkoon myös generoijamatriisi 
         $G =  
         \begin{bmatrix}
             I_k & B
@@ -666,7 +663,7 @@ pdfstartview=FitH]{hyperref}
             \end{bmatrix}
             \in C.
         \]
-        Mutta koska koodi $C$ on systemaattinen samme määritelmän~\ref{maar:systemaattinen} perusteella
+        Mutta koska koodi $C$ on systemaattinen, samme määritelmän~\ref{maar:systemaattinen} perusteella
         \[
             \begin{bmatrix}
                 u & w'  
@@ -675,9 +672,9 @@ pdfstartview=FitH]{hyperref}
             \begin{bmatrix}
                 u & w  
             \end{bmatrix}
-            = c = uG
+            = c = uG.
         \]
-        Täten saamme
+        Täten olemme osoittaneet, että
         \[
             C \subseteq \{\,vG \mid v \in A^k\,\}.
         \]
@@ -685,9 +682,9 @@ pdfstartview=FitH]{hyperref}
     \end{proof} 
 
     \chapter{Syndroomat}
-    Generoija matriisit ovat käteviä sanoja koodatessa. Tarvitsemme vielä tavan dekoodata vastaanotetut sanat helposti. Tarkastellaan seuraavaksi syndrooma tapaa tähän tarkoitukseen.
+    Generoijamatriisit ovat käteviä sanoja koodatessa. Tarvitsemme vielä tavan dekoodata vastaanotetut sanat helposti. Tarkastellaan seuraavaksi syndrooma tapaa tähän tarkoitukseen.
     \begin{maaritelma}[{\cite[s.~499]{PA}}]\label{maar:parcheckmatrix}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi 
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi 
         $G = 
         \begin{bmatrix}
             I_k & B  
@@ -700,11 +697,11 @@ pdfstartview=FitH]{hyperref}
                 I_{n-k}
             \end{bbmatrix}
         \]
-        kutsutaan \emph{pariteettitarkastusmatriisiksi}. Olkoon sana $w \in A^n$. Nyt sanan $w$ \emph{syndrooma} on $wH \in A^{n-k}$.
+        kutsutaan \emph{pariteetintarkastusmatriisiksi}. Olkoon sana $w \in A^n$. Nyt sanan $w$ \emph{syndrooma} on $wH \in A^{n-k}$.
     \end{maaritelma}
 
     \begin{esimerkki}\label{esim:parcheckmatrix}
-        Esimerkissä~\ref{esim:stdmatrix} pariteettitarkastusmatriisi oli
+        Esimerkissä~\ref{esim:stdmatrix} pariteetintarkastusmatriisi oli
         \[
             H = 
             \begin{bbmatrix}
@@ -717,7 +714,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \begin{lause}\label{lause:sanojensyndroomat}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G$ ja pariteettitarkastusmatriisi $H$. Nyt jokaiselle $v \in A^n$ pätee $vH = 0 \in A^{n-k}$, jos $v \in C$.
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$. Nyt jokaiselle $v \in A^n$ pätee $vH = 0 \in A^{n-k}$, jos $v \in C$.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~499]{PA}})]\label{tod:sanojensyndroomat}
@@ -762,7 +759,7 @@ pdfstartview=FitH]{hyperref}
     \end{proof} 
 
     \begin{lause}\label{lause:sivuluokkiensyndroomat}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G$ ja pariteettitarkastusmatriisi $H$.Nyt sanat $u$ ja $v$ ovat samassa sivuluokassa vain, jos sanoilla $u$ ja $v$ on sama syndrooma.
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$.Nyt sanat $u$ ja $v$ ovat samassa sivuluokassa vain, jos sanoilla $u$ ja $v$ on sama syndrooma.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~500]{PA}})]\label{tod:sivuluokkiensyndroomat}
@@ -777,6 +774,19 @@ pdfstartview=FitH]{hyperref}
         \end{align*}
         Täten sanojen $u$ ja $v$ syndroomat ovat samat.
     \end{proof} 
+
+    \begin{esimerkki}
+        Olkoon $C$ esimerkin~\ref{esim:stdmatrix} $(4,2)$-koodi, jonka pariteetintarkastusmatriisi H esitettiin esimerkissä~\ref{esim:parcheckmatrix}. Esitetään seuraavaksi jokaisen sivuluokan syndroomat. Ensimmäisellä rivillä on sivuluokan johtajat ja toisella niiden syndroomat.
+        \begin{center}
+            \begin{tabular}{llllll}
+                v && 0000 & 1000 & 0100 & 0001 \\
+                vH  &&  00 & 11 & 10 & 01
+            \end{tabular}
+        \end{center}
+        Oletetaan sitten, että vastaanotetaan sana $u = 0111$. Nyt sanan $u$ syndrooma on $uH = 01$, joten $u$ on sivuluokassa, jonka johtaja on sana $0001$. Dekoodaamme sanan $u$ siis $u - v = 0110 \in C$.
+        
+        Osaamme nyt dekoodata viestejä syndroomien avulla. Tämä on paljon kätevämpää kuin muodostaa standardi taulukko, kuten esimerkissä~\ref{esim:stdmatrix}.
+    \end{esimerkki}
 
     \begin{thebibliography}{9}
         % LaTeX ei oletusarvoisesti lisää lähdeluettelon otsikkoa sisällysluetteloon, joten se on tehtävä tässä erikseen:
