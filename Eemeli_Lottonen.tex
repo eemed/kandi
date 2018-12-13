@@ -110,6 +110,15 @@ pdfstartview=FitH]{hyperref}
 % Muutetaan lähdeluettelon otsikko, joka on oletusarvoisesti "Kirjallisuutta".
 \AtBeginDocument{\renewcommand*{\bibname}{Lähteet}}
 
+
+% 1 x n matriisit paremmiksi
+\renewcommand\arraystretch{0.8}
+% isoille matriiseille
+\newenvironment{bbmatrix}{
+    \renewcommand{\arraystretch}{1.2}
+    \begin{bmatrix}
+}
+{\end{bmatrix}\renewcommand{\arraystretch}{0.8}}
 % Komento \Kuukausi tulostaa nykyisen kuukauden nimen isolla alkukirjaimella kirjoitettuna.
 % \newcommand*{\Kuukausi}{\ifcase\ \month\ \or\ Tammi\or\ Helmi\or\ Maalis\or\ Huhti\or\ Touko\or\ Kesä\or\ Heinä\or\ Elo\or\ Syys\or\ Loka\or\ Marras\or\ Joulu\fi kuu}
 \newcommand*{\Kuukausi}{\ifcase\month\or{}Tammi\or{}Helmi\or{}Maalis\or{}Huhti\or{}Touko\or{}Kesä\or{}Heinä\or{}Elo\or{}Syys\or{}Loka\or{}Marras\or{}Joulu\fi kuu}
@@ -381,18 +390,17 @@ pdfstartview=FitH]{hyperref}
     \begin{esimerkki}
         Tarkastellaan seuraavaksi esimerkin~\ref{esim:minetaisyys} $(6,3)$-koodia $C$. Esimerkissä totesimme, että koodin $C$ minimietäisyys $d = 3$. Nyt siis jos $t = 1$, koodi $C$ osaa korjata lähetyksessä tapahtuneet virheet. Jos $t = 2$, koodi $C$ tunnistaa virheet, mutta ei osaa korjata niitä.
 
-        Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi tietää kumpi koodisanoista $u$ ja $v$ oli alunperin lähetetty.
+        Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi siis tietää kumpi koodisanoista oli alunperin lähetetty.
     \end{esimerkki}
 
     \section{Sivuluokkadekoodaus}
     \begin{lause}\label{lause:Hammingraja}
         Olkoon $C$ $(n, k)$-koodi, jonka minimietäisyys on $d \ge 2t +1$. Nyt siis koodi $C$ osaa korjata $t$ virhettä käyttämällä lähin-naapuri dekoodausta. Hamming-rajaksi kutsutaan seuraavaa epäyhtälöä:
         \[
-            2^k = \abs{C} \le \frac{2^n}{\binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\cdots+\binom{n}{t}}
+            2^k = \abs{C} \le \frac{2^n}{\binom{n}{0}+\binom{n}{1}+\binom{n}{2}+\cdots+\binom{n}{t}},
         \]
-        missä
         \[
-            \binom{n}{b} = \frac{n!}{b!(n-b)!}
+            \text{missä} \quad \binom{n}{b} = \frac{n!}{b!(n-b)!}
         \]
         on binomikerroin ja $\abs{C}$ on koodin $C$ koodisanojen lukumäärä.
     \end{lause}
@@ -415,13 +423,16 @@ pdfstartview=FitH]{hyperref}
         \end{align*}
     \end{proof}
 
-    Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki Abelin ryhmän aksioomat. Abelin ryhmän $A^n$ alkioiden lukumäärä on $2^n$. Nyt koodi $C$ on Abelin ryhmän $A^n$ aliryhmä yhteenlaskun suhteen ja se sisältää $2^k$ koodisanaa. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
+    Olkoot $C$ $(n,k)$-koodi ja joukko $A = \Zset_2$. Nyt vektoriavaruus $A^n$ on Abelin ryhmä yhteenlaskun suhteen, sillä vektoriavaruuden aksioomiin sisältyy kaikki Abelin ryhmän aksioomat. Abelin ryhmän $A^n$ alkioiden lukumäärä on $2^n$. Nyt koodi $C$ on Abelin ryhmän $A^n$ aliryhmä yhteenlaskun suhteen ja se sisältää $2^k$ koodisanaa. Koodilla $C$ on nyt $\frac{\abs{A^n}}{\abs{C}} = \frac{2^n}{2^k} = 2^{n-k}$ sivuluokkaa vektoriavaruudessa $A^n$.
 
-    Seuraavaksi esittelemme sivuluokkadekoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$, siten että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
+    Seuraavaksi esittelemme sivuluokkadekoodauksen koodin $C$ sivuluokkien avulla. Valitaan ensin jokaisesta sivuluokasta sana $u_i \in C$ siten, että sanalla $u$ on pienin paino. Nyt jokainen sivuluokka on seuraavaa muotoa:
     \[
         u_1 + C, u_2 + C, \dots, u_N + C,
     \]
-    missä $N = 2^{n-k}$. Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan. Nyt siis sana $w \in u_i + C$, joten se voidaan dekoodata takaisin koodisanaksi vähentämällä siitä sana $u_i$. Dekoodattu sana on siis $w - u_i \in C$. Tämä dekoodaus voidaan helposti toteuttaa muodostamalla koodille $C$ \emph{standardi taulukko}.
+    \[
+        \text{missä } N = 2^{n-k}.
+    \]
+     Valittuja sanoja $u_i$ kutsutaan \emph{sivuluokan johtajiksi}. Jos vastaanotetaan sana $w$, niin sanan $w$ täytyy kuulua johonkin sivuluokkaan. Nyt siis sana $w \in u_i + C$, joten se voidaan dekoodata takaisin koodisanaksi vähentämällä siitä sana $u_i$. Dekoodattu sana on siis $w - u_i \in C$. Tämä dekoodaus voidaan helposti toteuttaa muodostamalla koodille $C$ \emph{standardi taulukko}.
 
     \begin{esimerkki}\label{esim:stdmatrix}
         Olkoon $(4,2)$-koodi $C = \{\,0000,\, 0110,\, 1011\,,1101\,\}$. Muodostetaan koodille $C$ standardi taulukko.
@@ -456,15 +467,15 @@ pdfstartview=FitH]{hyperref}
 
     \begin{esimerkki}\label{esim:genmatrix}
         Valitaan seuraava $3 \times 6$ kokoinen matriisi:
+
         \[
             G=
-            \begin{bmatrix}
+            \begin{bbmatrix}
                 1 & 0 & 0 & 1 & 1 & 0\\
                 0 & 1 & 0 & 1 & 0 & 1\\
                 0 & 0 & 1 & 0 & 1 & 1
-            \end{bmatrix}
+            \end{bbmatrix}
         \]
-
         Nyt jokainen sana $x_1x_2x_3$ voidaan kirjoittaa $1 \times 3$ kokoisena matriisina. Kun alkuperäinen koodattava sana kerrotaan matriisilla $G$, saadaan koodin $C$ koodisana. Saamme koodisanaksi:
         \[
            \begin{bmatrix}
@@ -507,14 +518,13 @@ pdfstartview=FitH]{hyperref}
         Esimerkiksi esimerkin~\ref{esim:stdmatrix} generoija matriisi on
         \[
             C =
-            \begin{bmatrix}
+            \begin{bbmatrix}
                 1 & 0 & 1 & 1\\
                 0 & 1 & 1 & 0\\
-            \end{bmatrix},
+            \end{bbmatrix},
         \]
-        missä
         \[
-            I_k = 
+            \quad \text{missä }I_k = 
             \begin{bmatrix}
                 1 & 0 \\
                 0 & 1
@@ -585,7 +595,12 @@ pdfstartview=FitH]{hyperref}
         \[
             \phi(v + u) = (v + u)G = vG + uG = \phi(v) + \phi(u).
         \]
-        Nyt siis koodi $C$ on funktion $\phi$ kuvajoukko $Im(\phi)$. Määritelmän~\ref{maar:generoija} perusteella $G = [I_k\, B]$, joten
+
+        Nyt siis koodi $C$ on funktion $\phi$ kuvajoukko $Im(\phi)$. Määritelmän~\ref{maar:generoija} perusteella
+        $G = 
+        \begin{bmatrix}
+            I_k & B
+        \end{bmatrix}$, joten
         \[
             \phi(v) =
             \begin{bmatrix}
@@ -599,7 +614,17 @@ pdfstartview=FitH]{hyperref}
         \]
         jos $u = v$. Täten sana $u \in A^k$ kuvautuu vain yhtenä koodisanana koodissa $C$ ja siis funktio $\phi$ on injektio. Apulauseen~\ref{apu:isomorfia} perusteella vektoriavaruus $A^k \cong C$ ja koodi $C$ on vektoriavaruuden $A^n$ aliryhmä. Täten määritelmän~\ref{maar:tarvittavat} kohdan~\ref{kht:linkoodi} perusteella $C$ on $(n, k)$-koodi. Koodi $C$ on myös systemaattinen, sillä funktio $\phi$ on yksikäsitteinen.
 
-        Tarkastellaan sitten kohtaa~\ref{kht:sysgenmatr}. Olkoon koodi $C$ systemaattinen $(n, k)$-koodi. Muodostamme sitten generoija matriisin $G$. Olkoon $\{e_i\}$ neutraalikanta vektoriavaruudelle $A^k$. Koska koodi $C$ on systemaattinen, jokaiselle $1 \le i \le k$ on olemassa eri koodisana $c_i \in C$. Nyt siis koodisana $c_i = [e_i \,\, d_i]$, missä koodisanan $c_i$ ensimmäiset $k$ komponenttia ovat vektori $e_i$ ja $d_i$ on jokin vektori vektoriavaruudesta $A^{n-k}$. Olkoon nyt $B$ $k \times (n-k)$ kokoinen matriisi, missä on sanat $d_i$ riveinä. Olkoon myös generoija matriisi $G = [I_k\,\,B]$. Haluamme nyt osoittaa, että koodi $C = \{\,vG \mid v \in A^k\,\}$. Koska $e_i B$ on matriisin $B$ rivi kohdassa $i$, kun $1 \le i \le k$, saamme kaikille $1 \le i \le k$
+        Tarkastellaan sitten kohtaa~\ref{kht:sysgenmatr}. Olkoon koodi $C$ systemaattinen $(n, k)$-koodi. Muodostamme sitten generoija matriisin $G$. Olkoon $\{e_i\}$ neutraalikanta vektoriavaruudelle $A^k$. Koska koodi $C$ on systemaattinen, jokaiselle $1 \le i \le k$ on olemassa eri koodisana $c_i \in C$. Nyt siis koodisana 
+        $c_i = 
+        \begin{bmatrix}
+            e_i & d_i
+        \end{bmatrix}
+        $, missä koodisanan $c_i$ ensimmäiset $k$ komponenttia ovat vektori $e_i$ ja $d_i$ on jokin vektori vektoriavaruudesta $A^{n-k}$. Olkoon nyt $B$ $k \times (n-k)$ kokoinen matriisi, missä on sanat $d_i$ riveinä. Olkoon myös generoija matriisi 
+        $G =  
+        \begin{bmatrix}
+            I_k & B
+        \end{bmatrix}$.
+        Haluamme nyt osoittaa, että koodi $C = \{\,vG \mid v \in A^k\,\}$. Koska $e_i B$ on matriisin $B$ rivi kohdassa $i$, kun $1 \le i \le k$, saamme kaikille $1 \le i \le k$
         \[
             e_i G = e_i
             \begin{bmatrix}
@@ -620,13 +645,37 @@ pdfstartview=FitH]{hyperref}
         \[
             \{\,vG \mid v \in A^k\,\} \subseteq C.
         \]
-        Olkoon $c \in C$, missä $c = [u\,\,w]$, $u \in A^k$ ja $w \in A^{n-k}$. Nyt saamme
+        Olkoon $c \in C$, missä 
+        $c = 
+        \begin{bmatrix}
+            u & w
+        \end{bmatrix}$, $u \in A^k
+        $ ja $w \in A^{n-k}$. Nyt saamme
         \[
-            uG = u[I_k\,\,B] = [u\,\,uB] = [u\,\,w'] \in C.
+            uG = u
+            \begin{bmatrix}
+                I_k & B  
+            \end{bmatrix}
+            = 
+            \begin{bmatrix}
+                u & uB
+            \end{bmatrix}
+            = 
+            \begin{bmatrix}
+                u & w'  
+            \end{bmatrix}
+            \in C.
         \]
         Mutta koska koodi $C$ on systemaattinen samme määritelmän~\ref{maar:systemaattinen} perusteella
         \[
-            [u\,\,w'] = [u\,\,w] = c = uG
+            \begin{bmatrix}
+                u & w'  
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                u & w  
+            \end{bmatrix}
+            = c = uG
         \]
         Täten saamme
         \[
@@ -636,15 +685,20 @@ pdfstartview=FitH]{hyperref}
     \end{proof} 
 
     \chapter{Syndroomat}
-    Generoija matriisit ovat hyviä koodaamaan sanoja. Tarvitsemme vielä tavan dekoodata vastaanotetut sanat helposti. Tarkastellaan seuraavaksi syndrooma metodia tähän tarkoitukseen.
+    Generoija matriisit ovat käteviä sanoja koodatessa. Tarvitsemme vielä tavan dekoodata vastaanotetut sanat helposti. Tarkastellaan seuraavaksi syndrooma tapaa tähän tarkoitukseen.
     \begin{maaritelma}[{\cite[s.~499]{PA}}]\label{maar:parcheckmatrix}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G = [I_k\,\,B]$. Nyt $n \times (n-k)$ kokoista matriisia
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi 
+        $G = 
+        \begin{bmatrix}
+            I_k & B  
+        \end{bmatrix}
+        $. Nyt $n \times (n-k)$ kokoista matriisia
         \[
             H =
-            \begin{bmatrix}
+            \begin{bbmatrix}
                 B \\
                 I_{n-k}
-            \end{bmatrix}
+            \end{bbmatrix}
         \]
         kutsutaan \emph{pariteettitarkastusmatriisiksi}. Olkoon sana $w \in A^n$. Nyt sanan $w$ \emph{syndrooma} on $wH \in A^{n-k}$.
     \end{maaritelma}
@@ -653,12 +707,12 @@ pdfstartview=FitH]{hyperref}
         Esimerkissä~\ref{esim:stdmatrix} pariteettitarkastusmatriisi oli
         \[
             H = 
-            \begin{bmatrix}
+            \begin{bbmatrix}
                 1 & 1 \\
                 1 & 0 \\
                 1 & 0 \\
                 0 & 1
-            \end{bmatrix}.
+            \end{bbmatrix}.
         \]
     \end{esimerkki}
 
@@ -671,13 +725,21 @@ pdfstartview=FitH]{hyperref}
         \[
             \phi(u + v) = (v + u)H = uH + vH = \phi(u) + \phi(v)
         \]
-        Täten funktio $\phi$ on ryhmähomomorfismi. Funktio $\phi$ on myös surjektio, sillä olkoot $w \in A^{n-k}$ ja $v = [0\,\,\,w] \in A^n$ vektori. Nyt vektorin $v$ ensimmäiset $k$ komponenttia ovat nollia ja loput $n-k$ komponenttia vektorin $w$ komponentteja. Nyt siis
+        Täten funktio $\phi$ on ryhmähomomorfismi. Funktio $\phi$ on myös surjektio, sillä olkoot $w \in A^{n-k}$ ja vektori 
+        $v =
+        \begin{bmatrix}
+            0 & w  
+        \end{bmatrix}
+        \in A^n$. Nyt vektorin $v$ ensimmäiset $k$ komponenttia ovat nollia ja loput $n-k$ komponenttia vektorin $w$ komponentteja. Nyt siis
         \[
-            \phi(v) = vH = [0\,\,\,w]
+            \phi(v) = vH =
             \begin{bmatrix}
+                0 & w 
+            \end{bmatrix}
+            \begin{bbmatrix}
                B \\
                I_{n-k}
-            \end{bmatrix}
+            \end{bbmatrix}
             = 0B + wI_{n-k} = w
         \]
     Täten löysimme jokaiselle $w \in A^{n-k}$ vektorin $v \in A^n$ siten, että $\phi(v) = w$.
@@ -687,13 +749,33 @@ pdfstartview=FitH]{hyperref}
     \]
     Täten $\abs{\ker(\phi)} = \abs{A}^k = \abs{C}$. Osoitetaan vielä, että $C \subseteq \ker(\phi)$. Olkoon koodisana $v \in C$. Koska $C$ on systemaattinen koodi, $v = wG$, jollekin sanalle $w \in A^k$. Täten $\phi(v) = vH = wGH = 0$, sillä
     \[
-        GH = [I_k\,\,\,B]
+        GH =
         \begin{bmatrix}
+            I_k & B
+        \end{bmatrix}
+        \begin{bbmatrix}
             B \\
             I_{n-k}
-        \end{bmatrix}
+        \end{bbmatrix}
         = B + B = 0
     \]
+    \end{proof} 
+
+    \begin{lause}\label{lause:sivuluokkiensyndroomat}
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoija matriisi $G$ ja pariteettitarkastusmatriisi $H$.Nyt sanat $u$ ja $v$ ovat samassa sivuluokassa vain, jos sanoilla $u$ ja $v$ on sama syndrooma.
+    \end{lause}
+
+    \begin{proof}[Todistus \upshape(vrt. {\cite[s.~500]{PA}})]\label{tod:sivuluokkiensyndroomat}
+        Olkoot sanat $u, v \in A^n$. Aloitetaan oletamalla, että sivuluokat ovat samat. Josta seuraa
+        \[
+            u + C = v + C \quad \text{vain, jos} \quad u - v \in C.
+        \]
+        Nyt lauseen~\ref{lause:sanojensyndroomat} perusteella saamme, että $u - v \in C$ vain, jos
+        \begin{align*}
+            (u - v)H &= 0 \\
+            uH &= vH
+        \end{align*}
+        Täten sanojen $u$ ja $v$ syndroomat ovat samat.
     \end{proof} 
 
     \begin{thebibliography}{9}
