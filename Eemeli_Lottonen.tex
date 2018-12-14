@@ -41,7 +41,7 @@
 
 % Ulkoiset kuvatiedostot liitetään makropaketin graphicx komennolla \includegraphics.
 \usepackage{graphicx}
-%\graphicspath{{Kuvat/}} % Ulkoisten kuvatiedostojen kansio.
+\graphicspath{{Kuvat/}} % Ulkoisten kuvatiedostojen kansio.
 
 % Kelluvien kuvien ja taulukoiden oletusarvoista sijoittelua voi säätää makropaketin float komennolla \floatplacement.
 \usepackage{float}
@@ -196,17 +196,24 @@ pdfstartview=FitH]{hyperref}
     %           https://matematiikkalehtisolmu.fi/sanakirja
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Johdanto}
-    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Jotta viesti vastaanotettaisiin tarkoitetussa merkityksessään on kehitetty erilaisia metodeja virheiden havaitsemiseen ja korjaamiseen. Tässä tutkielmassa käsittelemme yksinkertaisimpia tapoja koodata ja dekoodata viestejä. 
+    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Jotta viesti vastaanotettaisiin tarkoitetussa merkityksessään on kehitetty erilaisia keinoja virheiden havaitsemiseen ja korjaamiseen. Tässä tutkielmassa käsittelemme yksinkertaisimpia tapoja koodata ja dekoodata viestejä. 
     
     Aloitamme hyvin yksinkertaisista esimerkeistä ja siirrymme sitten lähin naapuri dekoodaukseen. Lähin naapuri dekoodauksessa keskitymme ensin minimietäisyyden käyttöön ja sen jälkeen sivuluokkien käyttöön dekoodauksessa. Syvennymme sitten sivuluokkien käyttöön generoijamatriisien ja syndroomien kanssa. 
 
-    Oletetaan, että lukija tuntee joukkojen rakenteet kuten ryhmät ja kunnat. Loppuosassa tarvitaan myös tietoa homomorfismista, isomorfismista ja niiden ominaisuuksista.
+    Oletetaan, että lukija tuntee joukkojen rakenteet kuten ryhmät, kunnat. Loppuosassa tarvitaan myös tietoa sivuluokista, homomorfismista, isomorfismista ja niiden ominaisuuksista.
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.[VIITE] Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita
-    $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi. Merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun on lisätty $\bmod 2$.
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.\cite[s.~266]{GW} Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Viestien lähettämisessä voi kuitenkin tapahtua virheitä. Virheet voidaan estää, kun bittijonoon lisätään lisäinformaatiota. Kuvassa~\ref{kuva:lahetys} on kuvattu viestin lähettämisen ja vastaanottamisen kaikki vaiheet. Ensin alkuperäisen viesti koodaataan eli lisätään lisäinformaatiota vastaanotinta varten. Sitten viesti etenee lähettimelle ja se lähetetään. Kun viesti lähtee, voi välityksen aikana tapahtua virheitä esimerkiksi huonon lähetyskanavan takia. Kun viesti saapuu vastaanottimelle, se dekoodataan eli käytetään lisäinformaatiota mahdollisten virheiden tulkitsemiseen ja samalla poistetaan viestinkannalta turha lisäinformaatio. 
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\textwidth]{lahetys}
+        \caption{Viestin eteneminen}\label{kuva:lahetys}
+    \end{figure}
+ 
+     Numeroita $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi ja merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun on lisätty $\bmod 2$.
 
     Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     \begin{esimerkki}\label{esim:3bitsanat}
@@ -457,7 +464,7 @@ pdfstartview=FitH]{hyperref}
         \[\wt(u) \le \wt(w-y) = d(w,y).\]
     \end{proof}
 
-    \chapter{generoijamatriisit}
+    \chapter{Generoijamatriisit}
     Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $n$ pituisista koodisanoista. Näitä koodisanoja on yhteensä $2^k$ kapaletta. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Voimme kuitenkin tiivistää kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
 
     \begin{esimerkki}\label{esim:genmatrix}
@@ -714,7 +721,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \begin{lause}\label{lause:sanojensyndroomat}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$. Nyt jokaiselle $v \in A^n$ pätee $vH = 0 \in A^{n-k}$, jos $v \in C$.
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$. Olkoon myös sana $v \in A^n$. Nyt sanan $v$ syndrooma $vH = 0 \in A^{n-k}$ vain, jos $v \in C$.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~499]{PA}})]\label{tod:sanojensyndroomat}
@@ -783,7 +790,7 @@ pdfstartview=FitH]{hyperref}
                 vH  &&  00 & 11 & 10 & 01
             \end{tabular}
         \end{center}
-        Oletetaan sitten, että vastaanotetaan sana $u = 0111$. Nyt sanan $u$ syndrooma on $uH = 01$, joten $u$ on sivuluokassa, jonka johtaja on sana $0001$. Dekoodaamme sanan $u$ siis $u - v = 0110 \in C$.
+        Oletetaan sitten, että vastaanotetaan sana $u = 0111$. Nyt sanan $u$ syndrooma on $uH = 01$, joten $u$ on sivuluokassa, jonka johtaja on sana $v =0001$. Dekoodaamme sanan $u$ siis $u - v = 0110 \in C$.
         
         Osaamme nyt dekoodata viestejä syndroomien avulla. Tämä on paljon kätevämpää kuin muodostaa standardi taulukko, kuten esimerkissä~\ref{esim:stdmatrix}.
     \end{esimerkki}
