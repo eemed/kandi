@@ -196,24 +196,23 @@ pdfstartview=FitH]{hyperref}
     %           https://matematiikkalehtisolmu.fi/sanakirja
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Johdanto}
-    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Jotta viesti vastaanotettaisiin tarkoitetussa merkityksessään on kehitetty erilaisia keinoja virheiden havaitsemiseen ja korjaamiseen. Tässä tutkielmassa käsittelemme yksinkertaisimpia tapoja koodata ja dekoodata viestejä. 
+    Koodausteoriassa käsitellään tiedonsiirron virhealttiutta ja erilaisia tapoja havaita ja korjata välityksessä tapahtuneita virheitä. Useat häiriötekijät voivat vaikuttaa viestiin, kun sitä yritetään välittää lähettimeltä vastaanottimelle. Virheitä voidaan estää, lisäämällä viestiin lisäinformaatiota. 
     
-    Aloitamme hyvin yksinkertaisista esimerkeistä ja siirrymme sitten lähin naapuri dekoodaukseen. Lähin naapuri dekoodauksessa keskitymme ensin minimietäisyyden käyttöön ja sen jälkeen sivuluokkien käyttöön dekoodauksessa. Syvennymme sitten sivuluokkien käyttöön generoijamatriisien ja syndroomien kanssa. 
+    Kuvassa~\ref{kuva:lahetys} on kuvattu viestin lähettämisen ja vastaanottamisen kaikki vaiheet. Ensin alkuperäinen viesti koodaataan eli lisätään lisäinformaatiota vastaanotinta varten. Sitten viesti etenee lähettimelle ja se lähetetään. Kun viesti on lähetetty, voi välityksen aikana tapahtua virheitä esimerkiksi huonon lähetyskanavan takia. Kun viesti saapuu vastaanottimelle, se dekoodataan eli käytetään lisäinformaatiota mahdollisten virheiden tulkitsemiseen ja samalla poistetaan viestinkannalta turha lisäinformaatio. 
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\textwidth]{lahetys}
+        \caption{Viestin eteneminen}\label{kuva:lahetys}
+    \end{figure}
+
+    Tässä tutkielmassa käsittelemme eri tapoja koodata ja dekoodata viestejä.  Aloitamme hyvin yksinkertaisista esimerkeistä ja siirrymme sitten lähin naapuri dekoodaukseen. Lähin naapuri dekoodauksessa keskitymme ensin minimietäisyyden käyttöön ja sen jälkeen sivuluokkien käyttöön dekoodauksessa. Syvennymme sitten sivuluokkien käyttöön generoijamatriisien ja syndroomien kanssa. 
 
     Oletetaan, että lukija tuntee joukkojen rakenteet kuten ryhmät, kunnat. Loppuosassa tarvitaan myös tietoa sivuluokista, homomorfismista, isomorfismista ja niiden ominaisuuksista.
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.\cite[s.~266]{GW} Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Viestien lähettämisessä voi kuitenkin tapahtua virheitä. Virheet voidaan estää, kun bittijonoon lisätään lisäinformaatiota. Kuvassa~\ref{kuva:lahetys} on kuvattu viestin lähettämisen ja vastaanottamisen kaikki vaiheet. Ensin alkuperäisen viesti koodaataan eli lisätään lisäinformaatiota vastaanotinta varten. Sitten viesti etenee lähettimelle ja se lähetetään. Kun viesti lähtee, voi välityksen aikana tapahtua virheitä esimerkiksi huonon lähetyskanavan takia. Kun viesti saapuu vastaanottimelle, se dekoodataan eli käytetään lisäinformaatiota mahdollisten virheiden tulkitsemiseen ja samalla poistetaan viestinkannalta turha lisäinformaatio. 
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.6\textwidth]{lahetys}
-        \caption{Viestin eteneminen}\label{kuva:lahetys}
-    \end{figure}
- 
-     Numeroita $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi ja merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun on lisätty $\bmod 2$.
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.~\cite[s.~266]{GW} Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi ja merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun on lisätty $\bmod 2$.
 
     Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     \begin{esimerkki}\label{esim:3bitsanat}
@@ -234,7 +233,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin
-        esimerkissä~\ref{esim:3bitsanat}. Lisätään sitten sanoihin neljäs bitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan 4 bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään, kumpi koodisanoista on väärä, ja täten osataan myös korjata virhe.
+        esimerkissä~\ref{esim:3bitsanat}. Lisätään sitten sanoihin neljäs bitti $x_4 = (x_1 + x_2 + x_3) \bmod2$, joten koodattu sana on 1010. Jatketaan koodausta vielä toistamalla koodattu sana uudelleen eli sanan 101 lopullinen koodattu muoto on 10101010. Oletetaan, että välityksessä tapahtuu yksi virhe. Nyt vastaanottimessa viesti paloittellaan neljän bitin koodisanoihin. Esimerkin~\ref{esim:3bitsanat} mukaan tiedetään, kumpi koodisanoista on väärä, ja täten osataan myös korjata virhe.
     \end{esimerkki}
 
     \section{Tarvittavien käsitteiden määritelmiä}
@@ -355,12 +354,12 @@ pdfstartview=FitH]{hyperref}
         Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat, joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Kutsutaan niiden vastaavia koodisanoja $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti, jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
+        Tarkastellaan sitten sanoja, joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoon niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$ esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$.
 
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
         Oletetaan, että lähetettävä sana on 001 ja sen vastaava koodisana $u = 011110 \in C$.
-        Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaanotettua koodisanaa koodisanaksi $v$. Koska kooodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
+        Alussa oletettiin, että lähetyksessä tapahtuu yksi virhe. Kutsutaan tätä vastaanotettua koodisanaa koodisanaksi $v$. Koska koodin $C$ minimietäisyys on $d = 3$, on lähetty koodisana $u$ ainoa, jonka etäisyys vastaanotetusta koodisanasta $v$ on $d(u,v) = 1$.
     \end{esimerkki}
 
     \begin{maaritelma}[vrt. {\cite[s.~491]{PA}}]\label{maar:nkkoodi}
@@ -392,7 +391,7 @@ pdfstartview=FitH]{hyperref}
     \begin{esimerkki}
         Tarkastellaan seuraavaksi esimerkin~\ref{esim:minetaisyys} $(6,3)$-koodia $C$. Esimerkissä totesimme, että koodin $C$ minimietäisyys $d = 3$. Nyt siis jos $t = 1$, koodi $C$ osaa korjata lähetyksessä tapahtuneet virheet. Jos $t = 2$, koodi $C$ tunnistaa virheet, mutta ei osaa korjata niitä.
 
-        Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi siis tietää kumpi koodisanoista oli alunperin lähetetty.
+        Oletetaan, että lähetetty koodisana oli $111000 = u \in C$ ja vastaanotettu sana $011001= w \in C$. Koska sana $w$ ei ole koodisana, voimme tunnistaa, että lähetyksessä on tapahtunut virheitä. Nyt kuitenkin $d(u,w) = 2$ ja $d(u,v) = 2$, missä koodisana $v = 001011$. Emme voi siis tietää kumpi koodisanoista oli alun perin lähetetty.
     \end{esimerkki}
 
     \section{Sivuluokkadekoodaus}
@@ -408,11 +407,11 @@ pdfstartview=FitH]{hyperref}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.495]{PA}})]\label{tod:Hammingrajoitus}
-        Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ koodisanojen lukumäärä on $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ sanjen lukumäärä on siis
+        Olkoon koodin $C \in \Zset_2$ dimensio $\dim_{\Zset_2}(C) = k$. Täten koodin $C$ koodisanojen lukumäärä on $\abs{C} = 2^k$. Olkoon sitten koodisana $u \in C$. Nyt koodisana $w \in S_t(u)$, jos sanojen etäisyys $d(u,w) \le t$. Koodisanassa $u$ on $n$ komponenttia, joten binomikertoimesta $n! / b!(n-b)\!$ saadaan sanat, jotka eroavat sanasta $u$ $b$ komponentissa. Nyt pallon $S_t(u)$ sanojen lukumäärä on siis
         \[
             \abs{S_t(u)} = \binom{n}{0} + \binom{n}{1} +\binom{n}{2} +  \cdots + \binom{n}{t}.
         \]
-        Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$ toisinsanoen palloissa ei ole yhteisiä alkoita eli ne ovat erilliset. Nyt siis alkioita kaikissa palloissa on yhteensä
+        Koska $2t + 1 \le d$, niin ei ole olemassa alkioita $a \in S_t(u)$ ja $b \in S_t(v)$, jos $u \neq v$. Toisin sanoen palloissa ei ole yhteisiä alkioita eli ne ovat erilliset. Nyt siis alkioita kaikissa palloissa on yhteensä
         \[
             \sum_{u \in C}\abs{S_t(u)} = \abs{S_t(u)}\abs{C}.
         \]
@@ -460,12 +459,12 @@ pdfstartview=FitH]{hyperref}
         \[
             d(w,v) = \wt(w-v) = \wt(u). %\le \wt(w-y) = d(w,y).
         \]
-        Koska sivuluokaa voidaan merkitä sen minkätahansa alkion avulla, jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
+        Koska sivuluokka voidaan merkitä sen minkä tahansa alkion avulla, jokaiselle $y \in C$ pätee $w - y \in w + C = u + C$. Tästä saadaan epäyhtälö
         \[\wt(u) \le \wt(w-y) = d(w,y).\]
     \end{proof}
 
     \chapter{Generoijamatriisit}
-    Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $n$ pituisista koodisanoista. Näitä koodisanoja on yhteensä $2^k$ kapaletta. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Voimme kuitenkin tiivistää kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
+    Lineaariset binäärikoodit eli $(n,k)$-koodit koostuvat $n$ pituisista koodisanoista. Näitä koodisanoja on yhteensä $2^k$ kappaletta. Koodin kaikkien koodisanojen listaamisesta tulee nopeasti erittäin työlästä ja epäkäytännöllistä. Voimme kuitenkin tiivistää kaiken tarvittavan tiedon $k \times n$ kokoiseen matriisiin.
 
     \begin{esimerkki}\label{esim:genmatrix}
         Valitaan seuraava $3 \times 6$ kokoinen matriisi:
@@ -576,7 +575,7 @@ pdfstartview=FitH]{hyperref}
             \chi(xK) &= \phi(x) \\
             \chi(xK) &= y,
         \end{align*}
-        joten funtio $\chi$ on surjektio.
+        joten funktio $\chi$ on surjektio.
 
         Täten $\chi: G/K \rightarrow \phi(G)$ on isomorfismi ja
         \begin{align*}
@@ -670,7 +669,7 @@ pdfstartview=FitH]{hyperref}
             \end{bmatrix}
             \in C.
         \]
-        Mutta koska koodi $C$ on systemaattinen, samme määritelmän~\ref{maar:systemaattinen} perusteella
+        Mutta koska koodi $C$ on systemaattinen, saamme määritelmän~\ref{maar:systemaattinen} perusteella
         \[
             \begin{bmatrix}
                 u & w'  
@@ -766,11 +765,11 @@ pdfstartview=FitH]{hyperref}
     \end{proof} 
 
     \begin{lause}\label{lause:sivuluokkiensyndroomat}
-        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$.Nyt sanat $u$ ja $v$ ovat samassa sivuluokassa vain, jos sanoilla $u$ ja $v$ on sama syndrooma.
+        Olkoon $C$ systemaattinen $(n, k)$-koodi, jolla on generoijamatriisi $G$ ja pariteetintarkastusmatriisi $H$. Nyt sanat $u$ ja $v$ ovat samassa sivuluokassa vain, jos sanoilla $u$ ja $v$ on sama syndrooma.
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~500]{PA}})]\label{tod:sivuluokkiensyndroomat}
-        Olkoot sanat $u, v \in A^n$. Aloitetaan oletamalla, että sivuluokat ovat samat. Josta seuraa
+        Olkoot sanat $u, v \in A^n$. Aloitetaan olettamalla, että sivuluokat ovat samat. Josta seuraa
         \[
             u + C = v + C \quad \text{vain, jos} \quad u - v \in C.
         \]
