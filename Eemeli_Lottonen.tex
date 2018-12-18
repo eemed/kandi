@@ -213,7 +213,7 @@ pdfstartview=FitH]{hyperref}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \chapter{Lineaariset binäärikoodit}\label{ch: Lineaariset binäärikoodit}
 
-    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.~\cite[s.~266]{GW} Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi ja merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolaskuun ovat modulaarisia.
+    Useat kommunikointijärjestelmät käyttävät binäärijärjestelmää. Binäärijärjestelmässä mikä tahansa numero voidaan esittää muodossa, jossa on vain nollia ja ykkösiä.~\cite[s.~266]{GW} Esimerkiksi numero 9 on binäärijärjestelmässä bittijono 1001. Numeroita $n \in \{ 0, 1 \} = \Zset_2$ kutsutaan biteiksi ja merkinnällä $Z_2 = \{ 0, 1 \}$ tarkoitetaan kuntaa, jonka yhteen- ja kertolasku ovat modulaarisia.
 
     Oletetaan, että viesti koostuu $k$ bitistä. Nyt viestiin voidaan lisätä korjausbittejä, joiden avulla voidaan havaita mahdolliset virheet. Muodostetaan siis koodisana, jonka pituus on $n$. Nyt koodisanan viestiosa koostuu $k$ bitistä ja korjausosa $n-k$ bitistä. Tätä pituuden ja korjausbittien suhdetta $R = \frac{k}{n}$ kutsutaan informaatiosuhteeksi~\cite[s.~267]{GW}.
     \begin{esimerkki}\label{esim:3bitsanat}
@@ -225,12 +225,12 @@ pdfstartview=FitH]{hyperref}
             \end{tabular}
         \end{center}
         Määrittelemme sanoihin neljännen bitin
-        $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4 bittisten koodisanojen joukko eli koodi on siis seuraava:
+        $x_4 = (x_1 + x_2 + x_3) \bmod2$. Kaikkien 4-bittisten koodisanojen joukko eli koodi on siis seuraava:
         \[
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
         \]
         Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen, niin $x_4 = 0$, tai jos summa on pariton, niin $x_4 = 1$.
-        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä, missä kohtaa se on tapahtunut.[TODO]
+        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä, missä kohtaa se on tapahtunut. [TODO]
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin
@@ -356,7 +356,7 @@ pdfstartview=FitH]{hyperref}
         Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat, joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Niiden vastaavat koodisanat ovat $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti, jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja, joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoot niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$, esiintyy komponentti $i$, mutta ei komponenttia $j$ tai komponentti $j$, mutta ei komponenttia $i$. [ TODO CHECK THIS]
+        Tarkastellaan sitten sanoja, joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoot niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti, jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$, esiintyy komponentti $i$, mutta ei komponenttia $j$, tai komponentti $j$, mutta ei komponenttia $i$. % TODO
 
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
@@ -794,8 +794,15 @@ pdfstartview=FitH]{hyperref}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~500]{PA}})]\label{tod:sivuluokkiensyndroomat}
         Olkoot sanat $u, v \in A^n$. Aloitetaan olettamalla, että sivuluokat ovat samat. Silloin
+        \begin{align*}
+            u + C &= v + C \\
+            u + C - v &= C + v - v \\
+            (u - v) + C &= C,
+        \end{align*}
+        sillä ryhmä $A^n$ on Abelin ryhmä eli yhteenlasku on vaihdannainen.
+        Nyt siis 
         \[
-            u + C = v + C \quad \text{, jos ja vain jos} \quad u - v \in C.
+            u + C = v + C, \quad \text{ jos ja vain jos } u - v \in C.
         \]
         Nyt lauseen~\ref{lause:sanojensyndroomat} perusteella saamme, että $u - v \in C$, jos ja vain jos
         \begin{align*}
