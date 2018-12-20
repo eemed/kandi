@@ -221,7 +221,7 @@ pdfstartview=FitH]{hyperref}
         \begin{center}
             \begin{tabular}[t]{llll}
                 000 & 001 & 011 & 111 \\
-                110 & 100 & 101 & 010. \\.
+                110 & 100 & 101 & 010. \\
             \end{tabular}
         \end{center}
         Määrittelemme sanoihin neljännen bitin
@@ -230,7 +230,7 @@ pdfstartview=FitH]{hyperref}
             C = \{\, x_1x_2x_3x_4 \mid  x_i \in \{0,1\} = \Zset_2, 1 \le i \le 3, x_4 = (x_1 + x_2 + x_3) \bmod2\,\}
         \]
         Huomaamme, että kaikkien bittien summa $x_1 + x_2 + x_3 + x_4$ on aina parillinen, sillä jos kolmen ensimmäisen bitin summa $x_1 + x_2 + x_3$ on parillinen, niin $x_4 = 0$, tai jos summa on pariton, niin $x_4 = 1$.
-        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä, missä kohtaa se on tapahtunut. [TODO]
+        Tämän tiedon avulla vastaanottimessa voidaan päätellä, onko välityksessä tapahtunut virhe. Jos sanan kaikkien bittien summa ei ole parillinen, on viesti varmasti väärä. Virhe siis huomataan, mutta ei tiedetä, missä kohtaa se on tapahtunut. Kuitenkin, jos lähetyksessä on tapahtunut parillinen määrä virheitä, esimerkiksi kaksi, niin virhettä ei huomata ollenkaan.
     \end{esimerkki}
     \begin{esimerkki}\label{esim:3bitsanatjatko}
         Koodataan sana 101 samaan tapaan kuin
@@ -246,7 +246,7 @@ pdfstartview=FitH]{hyperref}
                 \text{$n$ kappaletta}}$ kutsutaan \emph{sanaksi}. Sanan $u$ \emph{pituus} on $n$ ja se muodostuu aakkoston $A$ alkioista.
             \item Osajoukkoa $C \subseteq A^n$ kutsutaan \emph{koodiksi}.
             \item Alkiota $u \in C \subseteq A^n$ kutsutaan \emph{koodisanaksi}.
-            \item\label{kht:linkoodi} Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$, kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi, jos $\dim_A C = k$, kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$, niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
+            \item\label{kht:linkoodi} Jos joukko $A$ on kunta, niin $A^n$ on $A$-vektoriavaruus. Jos nyt $C \subseteq A^n$ ja koodi $C$ on vektoriavaruuden $A^n$ aliavaruus kutsutaan osajoukkoa $C$ \emph{lineaariseksi koodiksi}. Lisäksi, jos $\dim_A C = k$, kutsutaan osajoukkoa $C$ $(n, k)$-\emph{koodiksi}. Jos $A = \Zset_2$, niin osajoukkoa $C$ kutsutaan \emph{lineaariseksi binäärikoodiksi}.
         \end{enumerate}
     \end{maaritelma}
 
@@ -257,7 +257,9 @@ pdfstartview=FitH]{hyperref}
         \]
         Silloin $A^4$ on vektoriavaruus, koska $A = \Zset_2$ on kunta. Huomataan, että koodisana $0000 \in C$. 
 
-        Olkoot koodisanat $u \in C$ ja $v \in C$. Nyt koodisanan $u$ kaikkien komponenttien summa on $0 \bmod2$. Täten sama pätee myös koodisanalle $u + v$. Olkoot sitten skalaari $a \in A = \Zset_2$ ja koodisana $u \in C$. Nyt koodisanalle $u$ pätee joko $au = 0$ tai $au = u$.
+        Olkoot koodisanat $u \in C$ ja $v \in C$. Nyt koodisanan $u$ kaikkien komponenttien summa on $0 \bmod2$. Täten sama pätee myös koodisanalle $u + v$. 
+        
+        Olkoot sitten skalaari $a \in A = \Zset_2$ ja koodisana $u \in C$. Nyt koodisanalle $u$ pätee joko $au = 0$ tai $au = u$. Täten koodi $C$ on vektoriavaruuden $A^4$ aliavaruus. Huomaamme myös, että koodin $C$ dimensio on $\dim_A(C) = 3$.
     \end{esimerkki}
 
     % \begin{lause}\label{thm: kasautumispisteen ympäristössä}
@@ -337,10 +339,9 @@ pdfstartview=FitH]{hyperref}
             x_5 = x_1 + x_3 \\
             x_6 = x_2 + x_3.
         \end{gather*}
-        % TODO Tähän se aliavaruus testi
         Listataan sitten uudelleen kaikki vektoriavaruuden $A^3$ sanat ja niiden koodisanat koodissa $C \subseteq A^6$. Saadaan taulukko
         \begin{center}
-            \begin{tabular}[t]{ll}
+            \begin{tabular}[htb]{ll}
                 sana & koodisana \\ \midrule
                 000 & 000000\\
                 001 & 001011\\
@@ -353,10 +354,10 @@ pdfstartview=FitH]{hyperref}
             \end{tabular}
         \end{center}
         
-        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat, joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Niiden vastaavat koodisanat ovat $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti, jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
+        Tarkastellaan seuraavaksi sanojen etäisyyttä toisistaan. Valitaan ensin sanat, joiden etäisyys toisistaan on 1. Valitaan esimerkiksi sanat $110$ ja $100$. Niitä vastaavat koodisanat ovat $u = 110011 \in C$ ja $v = 100110 \in C$. Nyt alkuperäiset sanat eroavat vain yhdessä komponentissa, mutta niiden koodisanat eroavat kolmessa komponentissa eli $d(u,v) = 3$. Yleisesti, jos kaksi sanaa eroavat vain komponentissa $i$, komponentti $i$ esiintyy kahdessa yhtälössä, jotka määrittelimme koodin $C$ tarkastuskomponenteille
         $x_4$, $x_5$ ja $x_6$. Koodisanojen etäisyys on siis vähintään 3.
 
-        Tarkastellaan sitten sanoja, joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoot niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti, jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$, esiintyy komponentti $i$, mutta ei komponenttia $j$, tai komponentti $j$, mutta ei komponenttia $i$. % TODO
+        Tarkastellaan sitten sanoja, joiden etäisyys on 2. Valitaan sanat $110$ ja $101$. Olkoot niiden vastaavat koodisanat $u = 110011 \in C$ ja $v = 101101 \in C$, joiden etäisyys on $d(u, v) = 4$. Yleisesti, jos sanat eroavat komponenteissa $i$ ja $j$, kahdessa yhtälöistä, jotka määrittelimme komponenteille $x_4x_5x_6$, esiintyy komponentti $i$, mutta ei komponenttia $j$, tai komponentti $j$, mutta ei komponenttia $i$.% TODO
 
         Tarkastellaan sitten sanoja, joiden etäisyys toisistaan on 3. Jos jo sanojen etäisyys on 3, on koodisanojenkin etäisyys vähintään kolme, sillä sanat sisältyvät sellaisenaan koodisanaan. Täten olemme osoittaneet, että minimietäisyys tässä tapauksessa on $d = 3$.
 
@@ -365,7 +366,7 @@ pdfstartview=FitH]{hyperref}
     \end{esimerkki}
 
     \begin{maaritelma}[vrt. {\cite[s.~494]{PA}}]\label{maar:nkkoodi}
-        Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan pariteetintarkastuskomponenteiksi.
+        Olkoot $C$ $(n, k)$-koodi ja $u = x_1x_2x_3\dots x_k \dots x_n \in C$ sen eräs koodisana. Nyt koodisanan $u$ ensimmäiset $k$ komponenttia muodostavat alkuperäisen viestin ja viimeisiä $n-k$ komponenttia kutsutaan \emph{pariteetintarkastuskomponenteiksi}.
     \end{maaritelma}
 
     \chapter{Virheenkorjaaminen}
@@ -518,7 +519,7 @@ pdfstartview=FitH]{hyperref}
     \begin{esimerkki}
         Esimerkiksi esimerkin~\ref{esim:stdmatrix} generoijamatriisi on
         \[
-            C =
+            G =
             \begin{bbmatrix}
                 1 & 0 & 1 & 1\\
                 0 & 1 & 1 & 0\\
@@ -596,7 +597,6 @@ pdfstartview=FitH]{hyperref}
     \end{lause}
 
     \begin{proof}[Todistus \upshape(vrt. {\cite[s.~498]{PA}})]\label{tod:systemaattinen}
-        % TODO tarviiko todistaa että ne on ryhmiä? EI KAI. On tässä vitusti vaikeempaaki paskaa
         Aloitetaan lauseen~\ref{lause:systemaattinen} kohdasta~\ref{kht:sysmatr}. Olkoot matriisi $G$ $k \times n$-generoijamatriisi ja koodi $C = \{\, vG \mid v \in A^k\,\}$. Koska kaikki vektoriavaruudet $A^r$ ovat Abelin ryhmiä yhteenlaskun suhteen, kun $r \ge 0$, voidaan määritellä funktio $\phi: A^k \rightarrow A^n$ siten, että $\phi(v) = Gv \in A^n$. Nyt tämä on ryhmähomomorfismi, sillä jokaiselle $u, v \in A^k$ pätee
         \[
             \phi(v + u) = (v + u)G = vG + uG = \phi(v) + \phi(u).
