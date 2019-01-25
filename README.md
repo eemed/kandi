@@ -1,6 +1,6 @@
 # Kandi
 
-Kandidaatin tutkielma algebrallisesta koodausteoriasta.
+Kandidaatintutkielma algebrallisesta koodausteoriasta.
 
 ## Intro
 
